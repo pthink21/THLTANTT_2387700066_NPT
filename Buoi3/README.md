@@ -214,10 +214,6 @@ Bandit: **0 findings** cho `secure-chat` và `netrecon`; hai kiểm tra subproce
 
 [Output pytest](evidence/test-results.txt) · [Báo cáo Bandit](evidence/bandit.json).
 
-Ảnh desktop Windows cũng được chụp **trong lúc làm bài**, bên cạnh các ảnh trình duyệt chụp trực tiếp trang đang chạy:
-
-![Desktop trong quá trình thực hành](screenshots/08-desktop-during-lab.png)
-
 ## 8. Phạm vi bảo mật của bài thực hành
 
 E2EE dùng khóa chia sẻ của nhóm: các thành viên giữ khóa có thể đọc và tạo ciphertext hợp lệ; danh tính người gửi được server gắn từ chứng chỉ client, chưa có chữ ký riêng cho từng tin nhắn. Không có ratchet hoặc forward secrecy ở lớp Fernet, không có cơ chế đổi khóa tự động khi thành viên rời phòng. Cache chống replay thuộc phiên client hiện tại. Tên phòng và danh tính thành viên vẫn thấy được ở server. Phòng tách luồng chuyển tiếp, chưa có ACL mời tham gia riêng.
