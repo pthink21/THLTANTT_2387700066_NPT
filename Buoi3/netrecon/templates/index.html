@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}{% block content %}
+<h1>Khám phá mạng.<br><em>Hiểu rõ hệ thống.</em></h1><p class="lead">Quét cổng, nhận dạng dịch vụ và đánh giá cấu hình bảo mật trong phạm vi được cho phép.</p>
+<div class="grid"><section class="card"><div class="section-title"><span>01 / CẤU HÌNH PHIÊN QUÉT</span><span class="muted">TCP / UDP</span></div>
+{% if error %}<div class="error" role="alert">{{ error }}</div>{% endif %}
+<form action="/scan" method="post"><input type="hidden" name="csrf" value="{{ csrf }}">
+<label>Mục tiêu<input name="target" value="127.0.0.1" required maxlength="253"></label>
+<label>Danh sách cổng<input name="ports" value="8022,8080,8443,9999" required><small>Phân cách bằng dấu phẩy; hỗ trợ khoảng như 8080-8083.</small></label>
+<div class="form-row"><label>Chế độ<select name="mode"><option value="all">Tất cả mô-đun</option><option value="scan">Quét cổng</option><option value="service">Nhận dạng dịch vụ</option><option value="banner">Lấy banner</option><option value="map">Sơ đồ mạng</option><option value="vuln">Kiểm tra cấu hình</option></select></label><label>Giao thức<select name="protocol"><option value="tcp">TCP</option><option value="udp">UDP</option></select></label></div>
+<div class="form-row"><label>Tốc độ (lần/giây)<input name="rate" type="number" value="10" min="0.5" max="100" step="0.5" required></label><label>Kỹ thuật<select name="technique"><option value="connect">TCP Connect / UDP Probe</option><option value="nmap-connect">Nmap Connect + Version</option><option value="syn">Nmap SYN (cần Npcap / quyền phù hợp)</option></select></label></div>
+<label>Subnet khám phá (tùy chọn)<input name="subnet" placeholder="127.0.0.1/32"><small>Tối đa 16 địa chỉ; phải thuộc whitelist.</small></label>
+<label>Email nhận báo cáo (tùy chọn)<input name="email" type="email" placeholder="thinh@localhost"></label>
+<button type="submit">Bắt đầu quét <span>↗</span></button></form></section>
+<aside><section class="card accent"><div class="eyebrow">PHẠM VI THỰC HÀNH</div><h2>Mỗi kết nối<br>đều có dấu vết.</h2><p>Whitelist / blacklist kiểm soát mục tiêu. Các lần thăm dò được giới hạn tốc độ và ghi lại cùng thời gian UTC.</p><div class="metric">127.0.0.0/8<small>Whitelist mặc định · loopback</small></div></section>
+<section class="card"><div class="section-title">CÁC MÔ-ĐUN</div><ul class="modules"><li><b>01</b> PortScanner <span>TCP + UDP</span></li><li><b>02</b> ServiceDetector <span>VERSION</span></li><li><b>03</b> BannerGrabber <span>BOUNDED</span></li><li><b>04</b> NetworkMapper <span>DISCOVERY</span></li><li><b>05</b> VulnChecker <span>EVIDENCE</span></li></ul></section></aside></div>{% endblock %}

@@ -1,0 +1,53 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\PThinkk\AppData\Local\Programs\Python\Python311\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\PThinkk\THLTANTT\Buoi3
+plugins: anyio-4.15.1
+collecting ... collected 44 items
+
+tests/test_netrecon.py::test_port_ranges PASSED                          [  2%]
+tests/test_netrecon.py::test_bad_ports[0] PASSED                         [  4%]
+tests/test_netrecon.py::test_bad_ports[65536] PASSED                     [  6%]
+tests/test_netrecon.py::test_bad_ports[-1] PASSED                        [  9%]
+tests/test_netrecon.py::test_bad_ports[a] PASSED                         [ 11%]
+tests/test_netrecon.py::test_bad_ports[1-999] PASSED                     [ 13%]
+tests/test_netrecon.py::test_bad_ports[] PASSED                          [ 15%]
+tests/test_netrecon.py::test_bad_ports[80,,443] PASSED                   [ 18%]
+tests/test_netrecon.py::test_whitelist_and_blacklist PASSED              [ 20%]
+tests/test_netrecon.py::test_rate_is_start_frequency PASSED              [ 22%]
+tests/test_netrecon.py::test_concurrent_rate_limit PASSED                [ 25%]
+tests/test_netrecon.py::test_tcp_open_closed_and_audit PASSED            [ 27%]
+tests/test_netrecon.py::test_udp_open_and_silence PASSED                 [ 29%]
+tests/test_netrecon.py::test_banner_bounded PASSED                       [ 31%]
+tests/test_netrecon.py::test_http_and_ssh_fingerprint PASSED             [ 34%]
+tests/test_netrecon.py::test_cve_not_inferred_from_port PASSED           [ 36%]
+tests/test_netrecon.py::test_http_configuration_findings PASSED          [ 38%]
+tests/test_netrecon.py::test_mapper_rejects_large_and_blocked_subnets PASSED [ 40%]
+tests/test_netrecon.py::test_email_header_injection_rejected PASSED      [ 43%]
+tests/test_netrecon.py::test_email_disabled_reported PASSED              [ 45%]
+tests/test_netrecon.py::test_engine_busy_rejected PASSED                 [ 47%]
+tests/test_netrecon.py::test_web_csrf_and_headers PASSED                 [ 50%]
+tests/test_netrecon.py::test_web_bad_target_with_valid_csrf PASSED       [ 52%]
+tests/test_netrecon.py::test_dns_rebinding_host_blocked PASSED           [ 54%]
+tests/test_netrecon.py::test_nmap_xml_parsing_and_fixed_arguments PASSED [ 56%]
+tests/test_netrecon.py::test_nmap_invalid_target_before_subprocess PASSED [ 59%]
+tests/test_netrecon.py::test_nmap_timeout_reported PASSED                [ 61%]
+tests/test_netrecon.py::test_xml_entities_rejected PASSED                [ 63%]
+tests/test_securechat.py::test_unicode_encryption PASSED                 [ 65%]
+tests/test_securechat.py::test_wrong_key_rejected PASSED                 [ 68%]
+tests/test_securechat.py::test_tamper_rejected PASSED                    [ 70%]
+tests/test_securechat.py::test_fragmented_frame PASSED                   [ 72%]
+tests/test_securechat.py::test_oversized_frame_rejected PASSED           [ 75%]
+tests/test_securechat.py::test_two_way_tls_and_room_isolation PASSED     [ 77%]
+tests/test_securechat.py::test_missing_client_cert_rejected PASSED       [ 79%]
+tests/test_securechat.py::test_wrong_hostname_rejected PASSED            [ 81%]
+tests/test_securechat.py::test_untrusted_ca_rejected PASSED              [ 84%]
+tests/test_securechat.py::test_certificate_identity_cannot_be_spoofed PASSED [ 86%]
+tests/test_securechat.py::test_duplicate_connection_rejected PASSED      [ 88%]
+tests/test_securechat.py::test_replayed_ciphertext_rejected PASSED       [ 90%]
+tests/test_securechat.py::test_room_switch_and_cleanup PASSED            [ 93%]
+tests/test_securechat.py::test_bad_room_rejected[] PASSED                [ 95%]
+tests/test_securechat.py::test_bad_room_rejected[../etc] PASSED          [ 97%]
+tests/test_securechat.py::test_bad_room_rejected[xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx] PASSED [100%]
+
+============================= 44 passed in 9.45s ==============================

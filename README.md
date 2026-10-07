@@ -181,3 +181,20 @@ curl http://127.0.0.1:5001/api/integrity
 8. ✅ **Secure Logging** — Không log PII thô
 9. ✅ **Tamper Detection** — Phát hiện thay đổi log
 10. ✅ **SSRF Protection** — Chặn request đến IP nội bộ
+
+---
+
+## Buổi 3 — Bảo mật mạng máy tính
+
+**NGUYỄN PHÚC THỊNH — MSSV 2387700066**
+
+SecureChat dùng mTLS, mã hóa đầu-cuối và quản lý nhiều phòng; NetRecon có CLI/Web,
+TCP/UDP, banner, nhận dạng dịch vụ với Nmap, mapping, kiểm tra cấu hình,
+whitelist/blacklist, giới hạn tốc độ, log và email SMTP.
+
+**Kết quả:** 44/44 test PASS, Bandit 0 findings, 9 ảnh chụp thực tế trong lúc thực hành.
+Email kiểm thử bằng SMTP cục bộ; SYN cần Npcap và chưa chạy thành công trên máy thực hành.
+
+[Mã nguồn và báo cáo Buổi 3](Buoi3/README.md) · [Ảnh thực hành](Buoi3/screenshots) · [Kết quả kiểm tra](Buoi3/evidence)
+
+![NetRecon Lab 03](Buoi3/screenshots/03-netrecon-tcp-results.png)

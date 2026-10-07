@@ -1,0 +1,16 @@
+.deps/
+.venv/
+working/
+runtime/
+__pycache__/
+.pytest_cache/
+*.pyc
+*.key
+*.csr
+*.srl
+certs/
+room-keys/
+.env
+logs/
+*.log
+!.env.example

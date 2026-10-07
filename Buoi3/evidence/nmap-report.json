@@ -1,0 +1,101 @@
+{
+  "student": "NGUYỄN PHÚC THỊNH",
+  "student_id": "2387700066",
+  "time": "2026-10-07T06:21:39.847414+00:00",
+  "target": "127.0.0.1",
+  "address": "127.0.0.1",
+  "mode": "all",
+  "protocol": "tcp",
+  "rate": 10.0,
+  "technique": "nmap-connect",
+  "ports": [
+    {
+      "port": 8022,
+      "protocol": "tcp",
+      "state": "open",
+      "service": {
+        "name": "ssh",
+        "extrainfo": "protocol 2.0",
+        "method": "probed",
+        "conf": "10"
+      }
+    },
+    {
+      "port": 8080,
+      "protocol": "tcp",
+      "state": "open",
+      "service": {
+        "name": "http-proxy",
+        "servicefp": "SF-Port8080-TCP:V=7.991%I=2%D=10/7%Time=6AC5E4FA%P=i686-pc-windows-windows%r(GetRequest,B2,\"HTTP/1\\.0\\x20200\\x20OK\\r\\nServer:\\x20LabHTTP/1\\.0\\x20\\r\\nDate:\\x20Wed,\\x2007\\x20Oct\\x202026\\x2006:21:46\\x20GMT\\r\\nContent-Type:\\x20text/plain;\\x20charset=utf-8\\r\\n\\r\\nNguy\\xe1\\xbb\\x85n\\x20Ph\\xc3\\xbac\\x20Th\\xe1\\xbb\\x8bnh\\x20\\xe2\\x80\\x94\\x202387700066\\x20\\xe2\\x80\\x94\\x20local\\x20HTTP\\x20target\")%r(HTTPOptions,221,\"HTTP/1\\.0\\x20501\\x20Unsupported\\x20method\\x20\\('OPTIONS'\\)\\r\\nServer:\\x20LabHTTP/1\\.0\\x20\\r\\nDate:\\x20Wed,\\x2007\\x20Oct\\x202026\\x2006:21:46\\x20GMT\\r\\nConnection:\\x20close\\r\\nContent-Type:\\x20text/html;charset=utf-8\\r\\nContent-Length:\\x20360\\r\\n\\r\\n<!DOCTYPE\\x20HTML>\\n<html\\x20lang=\\\"en\\\">\\n\\x20\\x20\\x20\\x20<head>\\n\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20<meta\\x20charset=\\\"utf-8\\\">\\n\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20<title>Error\\x20response</title>\\n\\x20\\x20\\x20\\x20</head>\\n\\x20\\x20\\x20\\x20<body>\\n\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20<h1>Error\\x20response</h1>\\n\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20<p>Error\\x20code:\\x20501</p>\\n\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20<p>Message:\\x20Unsupported\\x20method\\x20\\('OPTIONS'\\)\\.</p>\\n\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20<p>Error\\x20code\\x20explanation:\\x20501\\x20-\\x20Server\\x20does\\x20not\\x20support\\x20this\\x20operation\\.</p>\\n\\x20\\x20\\x20\\x20</body>\\n</html>\\n\")%r(RTSPRequest,16C,\"<!DOCTYPE\\x20HTML>\\n<html\\x20lang=\\\"en\\\">\\n\\x20\\x20\\x20\\x20<head>\\n\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20<meta\\x20charset=\\\"utf-8\\\">\\n\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20<title>Error\\x20response</title>\\n\\x20\\x20\\x20\\x20</head>\\n\\x20\\x20\\x20\\x20<body>\\n\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20<h1>Error\\x20response</h1>\\n\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20<p>Error\\x20code:\\x20400</p>\\n\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20<p>Message:\\x20Bad\\x20request\\x20version\\x20\\('RTSP/1\\.0'\\)\\.</p>\\n\\x20\\x20\\x20\\x20\\x20\\x20\\x20\\x20<p>Error\\x20code\\x20explanation:\\x20400\\x20-\\x20Bad\\x20request\\x20syntax\\x20or\\x20unsupported\\x20method\\.</p>\\n\\x20\\x20\\x20\\x20</body>\\n</html>\\n\")%r(FourOhFourRequest,B2,\"HTTP/1\\.0\\x20200\\x20OK\\r\\nServer:\\x20LabHTTP/1\\.0\\x20\\r\\nDate:\\x20Wed,\\x2007\\x20Oct\\x202026\\x2006:21:46\\x20GMT\\r\\nContent-Type:\\x20text/plain;\\x20charset=utf-8\\r\\n\\r\\nNguy\\xe1\\xbb\\x85n\\x20Ph\\xc3\\xbac\\x20Th\\xe1\\xbb\\x8bnh\\x20\\xe2\\x80\\x94\\x202387700066\\x20\\xe2\\x80\\x94\\x20local\\x20HTTP\\x20target\");",
+        "method": "table",
+        "conf": "3"
+      }
+    },
+    {
+      "port": 9999,
+      "protocol": "tcp",
+      "state": "closed",
+      "service": {
+        "name": "abyss",
+        "method": "table",
+        "conf": "3"
+      }
+    }
+  ],
+  "services": [
+    {
+      "port": 8022,
+      "banner": "SSH-2.0-LabSSH_1.0\r\n",
+      "name": "ssh",
+      "version": "SSH-2.0-LabSSH_1.0",
+      "evidence": "SSH greeting"
+    },
+    {
+      "port": 8080,
+      "banner": "HTTP/1.0 200 OK\r\nServer: LabHTTP/1.0 \r\nDate: Wed, 07 Oct 2026 06:21:51 GMT\r\nContent-Type: text/plain; charset=utf-8\r\n\r\n",
+      "name": "http",
+      "version": "LabHTTP/1.0",
+      "evidence": "HTTP status line and headers"
+    }
+  ],
+  "findings": [
+    {
+      "port": 8080,
+      "severity": "low",
+      "title": "Missing X-Content-Type-Options",
+      "evidence": "Header absent from sampled HEAD response",
+      "recommendation": "Set X-Content-Type-Options: nosniff.",
+      "confirmed_cve": false
+    },
+    {
+      "port": 8080,
+      "severity": "info",
+      "title": "Server version disclosed",
+      "evidence": "LabHTTP/1.0",
+      "recommendation": "Reduce unnecessary version information.",
+      "confirmed_cve": false
+    }
+  ],
+  "network": {
+    "subnet": "127.0.0.1/32",
+    "nodes": [
+      {
+        "id": "127.0.0.1",
+        "open_ports": [
+          8022,
+          8080
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "source": "scanner",
+        "target": "127.0.0.1"
+      }
+    ],
+    "method": "TCP discovery; a silent host may still be alive; edges show reachability, not physical topology"
+  },
+  "email": {
+    "status": "not_requested"
+  }
+}

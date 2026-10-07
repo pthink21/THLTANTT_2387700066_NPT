@@ -1,0 +1,105 @@
+{
+  "student": "NGUYỄN PHÚC THỊNH",
+  "student_id": "2387700066",
+  "time": "2026-10-07T06:26:57.993590+00:00",
+  "target": "127.0.0.1",
+  "address": "127.0.0.1",
+  "mode": "all",
+  "protocol": "tcp",
+  "rate": 10.0,
+  "technique": "connect",
+  "ports": [
+    {
+      "port": 8022,
+      "protocol": "tcp",
+      "state": "open",
+      "reason": "TCP connection accepted",
+      "duration_ms": 0.0
+    },
+    {
+      "port": 8080,
+      "protocol": "tcp",
+      "state": "open",
+      "reason": "TCP connection accepted",
+      "duration_ms": 16.0
+    },
+    {
+      "port": 8443,
+      "protocol": "tcp",
+      "state": "open",
+      "reason": "TCP connection accepted",
+      "duration_ms": 16.0
+    },
+    {
+      "port": 9999,
+      "protocol": "tcp",
+      "state": "closed",
+      "reason": "connection refused/reset",
+      "duration_ms": 2031.0
+    }
+  ],
+  "services": [
+    {
+      "port": 8022,
+      "banner": "SSH-2.0-LabSSH_1.0\r\n",
+      "name": "ssh",
+      "version": "SSH-2.0-LabSSH_1.0",
+      "evidence": "SSH greeting"
+    },
+    {
+      "port": 8080,
+      "banner": "HTTP/1.0 200 OK\r\nServer: LabHTTP/1.0 \r\nDate: Wed, 07 Oct 2026 06:27:00 GMT\r\nContent-Type: text/plain; charset=utf-8\r\n\r\n",
+      "name": "http",
+      "version": "LabHTTP/1.0",
+      "evidence": "HTTP status line and headers"
+    },
+    {
+      "port": 8443,
+      "banner": "No readable banner (ConnectionResetError)",
+      "name": "unknown",
+      "version": "",
+      "evidence": "No recognizable application response"
+    }
+  ],
+  "findings": [
+    {
+      "port": 8080,
+      "severity": "low",
+      "title": "Missing X-Content-Type-Options",
+      "evidence": "Header absent from sampled HEAD response",
+      "recommendation": "Set X-Content-Type-Options: nosniff.",
+      "confirmed_cve": false
+    },
+    {
+      "port": 8080,
+      "severity": "info",
+      "title": "Server version disclosed",
+      "evidence": "LabHTTP/1.0",
+      "recommendation": "Reduce unnecessary version information.",
+      "confirmed_cve": false
+    }
+  ],
+  "network": {
+    "subnet": "127.0.0.1/32",
+    "nodes": [
+      {
+        "id": "127.0.0.1",
+        "open_ports": [
+          8022,
+          8080,
+          8443
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "source": "scanner",
+        "target": "127.0.0.1"
+      }
+    ],
+    "method": "TCP discovery; a silent host may still be alive; edges show reachability, not physical topology"
+  },
+  "email": {
+    "status": "not_requested"
+  }
+}
