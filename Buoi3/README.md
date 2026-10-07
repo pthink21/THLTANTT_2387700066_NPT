@@ -214,6 +214,36 @@ Bandit: **0 findings** cho `secure-chat` và `netrecon`; hai kiểm tra subproce
 
 [Output pytest](evidence/test-results.txt) · [Báo cáo Bandit](evidence/bandit.json).
 
+### Chạy lại trực tiếp trong CMD Windows
+
+Ngày 07/10/2026, mở CMD và chạy lại các lệnh dưới đây trên máy thực hành. Sáu ảnh được chụp trực tiếp cửa sổ CMD sau khi dịch vụ khởi động hoặc lệnh hoàn thành. Tiêu đề cửa sổ ghi tên sinh viên không dấu để hiển thị ổn định; output Python dùng UTF-8.
+
+**Khởi động dịch vụ lab** — `python -X utf8 run_lab.py serve`: server chat mTLS và các dịch vụ đích sẵn sàng trên loopback.
+
+![CMD: khởi động dịch vụ lab](screenshots/10-cmd-running-services.png)
+
+**Chat hai chiều** — `python -X utf8 run_lab.py demo`: TLS 1.3, giải mã tin nhắn tiếng Việt, phòng riêng không nhận tin và khóa sai bị từ chối; exit code 0.
+
+![CMD: SecureChat TLS và E2EE](screenshots/11-cmd-securechat.png)
+
+**Quét TCP** — `python netrecon/cli.py --target 127.0.0.1 --ports 8080,9999 --mode scan --rate-limit 10`: `8080/tcp` mở, `9999/tcp` đóng.
+
+![CMD: NetRecon TCP](screenshots/12-cmd-netrecon-tcp.png)
+
+**Quét UDP** — `python netrecon/cli.py --target 127.0.0.1 --ports 9998,9999 --protocol udp --mode scan`: `9998/udp` phản hồi, `9999/udp` bị hệ điều hành từ chối.
+
+![CMD: NetRecon UDP](screenshots/13-cmd-netrecon-udp.png)
+
+**Kiểm thử và rà soát mã nguồn** — `python -m pytest tests -q` và `python -m bandit -r secure-chat netrecon`: 44 test PASS; Bandit không phát hiện vấn đề.
+
+![CMD: pytest và Bandit](screenshots/14-cmd-tests-bandit.png)
+
+**Nmap chạy trực tiếp** — `nmap -sT -Pn -n -sV --version-light --max-rate 10 --host-timeout 30s -p 8022,9999 127.0.0.1`: nhận dạng greeting SSH ở cổng 8022, cổng 9999 đóng; exit code 0. Cảnh báo thiếu Npcap vẫn hiển thị trong ảnh, TCP Connect tiếp tục chạy được.
+
+![CMD: Nmap nhận dạng dịch vụ](screenshots/15-cmd-nmap.png)
+
+[Báo cáo TCP từ lần chạy CMD](evidence/cmd-tcp-report.json) · [Báo cáo UDP từ lần chạy CMD](evidence/cmd-udp-report.json).
+
 ## 8. Phạm vi bảo mật của bài thực hành
 
 E2EE dùng khóa chia sẻ của nhóm: các thành viên giữ khóa có thể đọc và tạo ciphertext hợp lệ; danh tính người gửi được server gắn từ chứng chỉ client, chưa có chữ ký riêng cho từng tin nhắn. Không có ratchet hoặc forward secrecy ở lớp Fernet, không có cơ chế đổi khóa tự động khi thành viên rời phòng. Cache chống replay thuộc phiên client hiện tại. Tên phòng và danh tính thành viên vẫn thấy được ở server. Phòng tách luồng chuyển tiếp, chưa có ACL mời tham gia riêng.

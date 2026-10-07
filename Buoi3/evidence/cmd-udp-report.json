@@ -1,0 +1,33 @@
+{
+  "student": "NGUYỄN PHÚC THỊNH",
+  "student_id": "2387700066",
+  "time": "2026-10-07T06:42:04.190877+00:00",
+  "target": "127.0.0.1",
+  "address": "127.0.0.1",
+  "mode": "scan",
+  "protocol": "udp",
+  "rate": 10.0,
+  "technique": "connect",
+  "ports": [
+    {
+      "port": 9998,
+      "protocol": "udp",
+      "state": "open",
+      "reason": "UDP response received",
+      "duration_ms": 0.0
+    },
+    {
+      "port": 9999,
+      "protocol": "udp",
+      "state": "closed",
+      "reason": "connection refused/reset",
+      "duration_ms": 0.0
+    }
+  ],
+  "services": [],
+  "findings": [],
+  "network": null,
+  "email": {
+    "status": "not_requested"
+  }
+}

@@ -192,7 +192,7 @@ SecureChat dùng mTLS, mã hóa đầu-cuối và quản lý nhiều phòng; Net
 TCP/UDP, banner, nhận dạng dịch vụ với Nmap, mapping, kiểm tra cấu hình,
 whitelist/blacklist, giới hạn tốc độ, log và email SMTP.
 
-**Kết quả:** 44/44 test PASS, Bandit 0 findings, 8 ảnh chụp giao diện và kết quả thực hành.
+**Kết quả:** 44/44 test PASS, Bandit 0 findings, 14 ảnh minh chứng: 8 ảnh giao diện và 6 ảnh chạy trực tiếp trong CMD Windows.
 Email kiểm thử bằng SMTP cục bộ; SYN cần Npcap và chưa chạy thành công trên máy thực hành.
 
 [Mã nguồn và báo cáo Buổi 3](Buoi3/README.md) · [Ảnh thực hành](Buoi3/screenshots) · [Kết quả kiểm tra](Buoi3/evidence)

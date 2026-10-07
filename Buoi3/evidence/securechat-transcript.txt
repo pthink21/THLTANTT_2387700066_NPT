@@ -3,7 +3,7 @@ bob authenticated: TLSv1.3 / TLS_AES_256_GCM_SHA384
 Client identities come from distinct CA-signed certificates.
 alice -> general: Xin chào Bob! Nguyễn Phúc Thịnh — MSSV 2387700066
 bob decrypted: Xin chào Bob! Nguyễn Phúc Thịnh — MSSV 2387700066
-On the wire / relay payload: gAAAAABqxebe3HpiEzpCJtB_kT7-zNL6Z7Y4WMLbZHkfkI83fHW8f2En1xu-uLnzrAj9R-WFOUbttbcUyAfZ45itcqvdH4PR2L5TOgq0eOVvMOyXbV_yGwM4IptYzIJrB2bPHoeKv1ESfbJajBHThmCmt7EXwEho6w==
+On the wire / relay payload: gAAAAABqxem3VEdaLD5MXfxTeu1S_Ecow4CsvN_gNZbIjzvXI3mvZamz3MxLShME4-9mV58WBF-6MZ8GnDd2tGax2zOUhlvAcbRE5VC5aQfVDjzfZPGhyGvSwTTHtrVZciz6LlMUCChTDos6UMAYWXesPZSvpCqeCQ==
 PASS: charlie in private receives no general-room message.
 alice decrypted reply: Đã nhận tin nhắn qua TLS và giải mã đầu-cuối thành công.
 PASS: wrong room key cannot decrypt the ciphertext.
