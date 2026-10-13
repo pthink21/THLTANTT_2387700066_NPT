@@ -1,9 +1,9 @@
 # Lab 04 — Bảo mật Web App và API
 
-**Sinh viên:** Nguyễn Phúc Thịnh  
-**MSSV:** 2387700066  
-**Môn học:** Thực hành Lập trình An ninh thông tin  
-**Đề bài:** `lab-04.pdf`, 29 trang; thực hành mục 4.2 và 4.4.  
+**Sinh viên:** Nguyễn Phúc Thịnh
+**MSSV:** 2387700066
+**Môn học:** Thực hành Lập trình An ninh thông tin
+**Đề bài:** `lab-04.pdf`, 29 trang; thực hành mục 4.2 và 4.4.
 **Ngày thực hiện:** 13/10/2026.
 
 Đã xây dựng **WebVulnScanner** và **JWTSecure**, chạy dịch vụ thật trên loopback, kiểm thử HTTP và trình duyệt, chụp **15 ảnh**, trong đó có **7 ảnh cửa sổ Windows CMD**. Kết quả: **25 unittest scanner + 35 pytest JWT = 60 test đạt**; kiểm thử tích hợp đạt; Bandit không còn finding trong phạm vi đã cấu hình. Hai warning của pytest đến từ việc cố ý tạo khóa yếu trong test JWTCracker.

@@ -111,4 +111,3 @@ echo %LAB_EXIT% > "{marker}"
     USER.SetWindowPos(hwnd, -2, 0, 0, 0, 0, 0x0001 | 0x0002)
     print(f'CAPTURED {label}: {dest}', flush=True)
     return process
-

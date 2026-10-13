@@ -1,6 +1,6 @@
 # Báo cáo Lab 04 — Bảo mật Web App và API
 
-**Nguyễn Phúc Thịnh — MSSV 2387700066**  
+**Nguyễn Phúc Thịnh — MSSV 2387700066**
 Ngày thực hành: 13/10/2026. Nguồn yêu cầu: `lab-04.pdf`, mục 4.2 WebVulnScanner và 4.4 JWTSecure. Mã mẫu trong PDF được đọc cả phần văn bản và các ảnh code; không chỉ dựa trên phần trích xuất văn bản.
 
 ## 1. Mục tiêu và kiến thức
