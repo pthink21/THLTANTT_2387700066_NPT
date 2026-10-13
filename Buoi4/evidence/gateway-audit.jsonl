@@ -1,0 +1,9 @@
+{"time": "2026-10-13T15:07:25.476512+00:00", "method": "GET", "path": "/protected", "status": 200}
+{"time": "2026-10-13T15:07:25.492158+00:00", "method": "GET", "path": "/protected", "status": 401}
+{"time": "2026-10-13T15:07:25.494164+00:00", "method": "GET", "path": "/protected", "status": 401}
+{"time": "2026-10-13T15:07:25.496163+00:00", "method": "GET", "path": "/protected", "status": 401}
+{"time": "2026-10-13T15:07:25.523384+00:00", "method": "GET", "path": "/protected", "status": 401}
+{"time": "2026-10-13T15:07:25.541934+00:00", "method": "POST", "path": "/refresh", "status": 200}
+{"time": "2026-10-13T15:07:25.543944+00:00", "method": "POST", "path": "/refresh", "status": 401}
+{"time": "2026-10-13T15:07:25.556150+00:00", "method": "POST", "path": "/revoke", "status": 204}
+{"time": "2026-10-13T15:07:25.569189+00:00", "method": "POST", "path": "/refresh", "status": 401}

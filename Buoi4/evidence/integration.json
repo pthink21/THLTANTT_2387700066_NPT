@@ -1,0 +1,27 @@
+{
+  "jwt_valid_access": 200,
+  "jwt_missing_token": 401,
+  "jwt_invalid_signature": 401,
+  "jwt_refresh_as_access": 401,
+  "jwt_expired": 401,
+  "refresh_rotation": 200,
+  "refresh_replay_rejected": 401,
+  "revoked_refresh_rejected": 401,
+  "csrf_unsafe_post_no_token": 200,
+  "csrf_safe_post_no_token": 403,
+  "oauth_code_pkce_exchange": true,
+  "oauth_callback_replay_rejected": true,
+  "offline_weak_key_found": true,
+  "refresh_race_successes_of_8": 1,
+  "scanner_types": [
+    "CSRF",
+    "SQLi",
+    "SSRF",
+    "XSS"
+  ],
+  "safe_fixture_findings": {
+    "safe?id=1": 0,
+    "safe-items?id=1": 0,
+    "safe-fetch?url=": 0
+  }
+}

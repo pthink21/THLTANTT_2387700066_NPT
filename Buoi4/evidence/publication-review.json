@@ -1,0 +1,15 @@
+{
+  "target": "https://github.com/pthink21/THLTANTT_2387700066_NPT.git",
+  "text_files_checked": 71,
+  "runtime_secrets_found": 0,
+  "full_jwt_strings_found": 0,
+  "screenshots_verified": 15,
+  "excluded": [
+    ".pytest_cache",
+    ".venv",
+    "__pycache__",
+    "runtime",
+    "working"
+  ],
+  "status": "PASS"
+}

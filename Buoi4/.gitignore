@@ -1,0 +1,9 @@
+.venv/
+working/
+runtime/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+*.log
+.env
+*.sqlite*

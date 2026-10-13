@@ -1,0 +1,11 @@
+{
+  "scanner-unittest": {
+    "exit_code": 0
+  },
+  "jwt-pytest": {
+    "exit_code": 0
+  },
+  "bandit": {
+    "exit_code": 0
+  }
+}

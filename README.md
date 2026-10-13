@@ -198,3 +198,16 @@ Email kiểm thử bằng SMTP cục bộ; SYN cần Npcap và chưa chạy thà
 [Mã nguồn và báo cáo Buổi 3](Buoi3/README.md) · [Ảnh thực hành](Buoi3/screenshots) · [Kết quả kiểm tra](Buoi3/evidence)
 
 ![NetRecon Lab 03](Buoi3/screenshots/03-netrecon-tcp-results.png)
+
+
+---
+
+## Buổi 4 — Bảo mật Web App và API
+
+**Nguyễn Phúc Thịnh — MSSV 2387700066.** WebVulnScanner (XSS, SQLi, CSRF, SSRF) và JWTSecure (JWT validation, offline wordlist test, OAuth Code + PKCE, token rotation/revocation, API gateway).
+
+Kết quả thực hành: **60/60 test đạt**, kiểm thử HTTP và Chrome đạt; **15 ảnh thao tác thật gồm 7 ảnh Windows CMD**. Khóa/token runtime được loại khỏi Git.
+
+📁 [Buoi4](Buoi4) · 📖 [Hướng dẫn và ảnh](Buoi4/README.md) · 📝 [Báo cáo](Buoi4/REPORT.md)
+
+![Lab 04 — WebVulnScanner](Buoi4/screenshots/08-web-scanner.png)

@@ -1,0 +1,11 @@
+[main]	INFO	profile include tests: None
+[main]	INFO	profile exclude tests: None
+[main]	INFO	cli include tests: None
+[main]	INFO	cli exclude tests: None
+[tester]	WARNING	nosec encountered (B105), but no failed test on file .\lab_target.py:122
+[tester]	WARNING	nosec encountered (B105), but no failed test on file .\lab_target.py:122
+[tester]	WARNING	nosec encountered (B105), but no failed test on file .\lab_target.py:122
+[tester]	WARNING	nosec encountered (B105), but no failed test on file jwt-security-tools\api_gateway\gateway.py:70
+[tester]	WARNING	nosec encountered (B105), but no failed test on file jwt-security-tools\api_gateway\gateway.py:70
+[tester]	WARNING	nosec encountered (B105), but no failed test on file jwt-security-tools\api_gateway\gateway.py:70
+[json]	INFO	JSON output written to file: evidence/bandit.json

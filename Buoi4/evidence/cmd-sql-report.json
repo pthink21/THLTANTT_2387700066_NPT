@@ -1,0 +1,26 @@
+{
+  "generated_at": "2026-10-13T15:07:23.377095+00:00",
+  "student": "Nguyễn Phúc Thịnh",
+  "student_id": "2387700066",
+  "vulnerabilities": [
+    {
+      "type": "SQLi",
+      "param": "id",
+      "risk": "CRITICAL",
+      "confidence": "behavioral",
+      "payload": "1 OR 1=1 / 1 AND 1=2",
+      "desc": "SQL Injection: khác biệt true/false hoặc lỗi SQL mới xuất hiện.",
+      "evidence": {
+        "boolean_differential": true,
+        "errors": [
+          "sqlite3.operationalerror"
+        ]
+      },
+      "remediation": "Dùng prepared statements, hạn chế quyền DB, ẩn lỗi SQL."
+    }
+  ],
+  "count": 1,
+  "target": "http://127.0.0.1:5102/items?id=1",
+  "errors": [],
+  "complete": true
+}

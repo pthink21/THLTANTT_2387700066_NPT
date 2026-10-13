@@ -1,0 +1,64 @@
+{
+  "generated_at": "2026-10-13T15:07:26.467138+00:00",
+  "student": "Nguyễn Phúc Thịnh",
+  "student_id": "2387700066",
+  "vulnerabilities": [
+    {
+      "type": "XSS",
+      "param": "q",
+      "payload": "<script>alert(1)</script>",
+      "url": "http://127.0.0.1:5102/page?id=1&q=%3Cscript%3Ealert%281%29%3C%2Fscript%3E",
+      "risk": "HIGH",
+      "confidence": "candidate",
+      "desc": "Payload được phản chiếu nguyên dạng trong HTML; cần xác minh thực thi trong trình duyệt.",
+      "remediation": "Escape đầu ra theo ngữ cảnh, dùng textContent và CSP."
+    },
+    {
+      "type": "XSS",
+      "param": "q",
+      "payload": "\"><svg/onload=alert(1)>",
+      "url": "http://127.0.0.1:5102/page?id=1&q=%22%3E%3Csvg%2Fonload%3Dalert%281%29%3E",
+      "risk": "HIGH",
+      "confidence": "candidate",
+      "desc": "Payload được phản chiếu nguyên dạng trong HTML; cần xác minh thực thi trong trình duyệt.",
+      "remediation": "Escape đầu ra theo ngữ cảnh, dùng textContent và CSP."
+    },
+    {
+      "type": "CSRF",
+      "csrf_protected": false,
+      "forms_checked": 1,
+      "missing_forms": [
+        0
+      ],
+      "risk": "MEDIUM",
+      "confidence": "indicator",
+      "desc": "No CSRF token found: potentially vulnerable to CSRF; cần kiểm tra server, cookie và Origin.",
+      "remediation": "Xác thực CSRF token phía server, SameSite cookie, kiểm tra Origin."
+    },
+    {
+      "type": "SQLi",
+      "param": "id",
+      "risk": "CRITICAL",
+      "confidence": "behavioral",
+      "payload": "1 OR 1=1 / 1 AND 1=2",
+      "desc": "SQL Injection: khác biệt true/false hoặc lỗi SQL mới xuất hiện.",
+      "evidence": {
+        "boolean_differential": true,
+        "errors": [
+          "sqlite3.operationalerror"
+        ]
+      },
+      "remediation": "Dùng prepared statements, hạn chế quyền DB, ẩn lỗi SQL."
+    },
+    {
+      "type": "SSRF",
+      "param": "url",
+      "risk": "HIGH",
+      "confidence": "behavioral",
+      "desc": "Server đã lấy được marker từ dịch vụ nội bộ 5103.",
+      "evidence": "LAB04-INTERNAL-PROOF-2387700066",
+      "remediation": "Không cho phép loopback/private/link-local; allowlist URL và không follow redirect."
+    }
+  ],
+  "count": 5
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "file": "01-cmd-services.png",
+    "width": 1330,
+    "height": 970,
+    "sha256": "9dccc408a9069e87bec3189bec43d992391deb5a72e87657be30a8184aeed3c7"
+  },
+  {
+    "file": "02-cmd-scanner-unittest.png",
+    "width": 1330,
+    "height": 970,
+    "sha256": "2c9ab963e104a9e57f2f92f6c6d6569118636137ba1a7d3f919fd95149d0f726"
+  },
+  {
+    "file": "03-cmd-jwt-pytest.png",
+    "width": 1330,
+    "height": 970,
+    "sha256": "cba318fcb09a70bf3b26a4896a15e0eb9b3c823fe6e921711deaffb658bbcdb7"
+  },
+  {
+    "file": "04-cmd-scanner-cli.png",
+    "width": 1330,
+    "height": 970,
+    "sha256": "e87ed09fe94bdb89cb2a570670a4afa61a42e9533fb37f78c5774be27194cdaf"
+  },
+  {
+    "file": "05-cmd-integration.png",
+    "width": 1330,
+    "height": 970,
+    "sha256": "d69a09c7c5f24d44bacba529fa95ab4c713f355da6bc028a182f1f979a526eb3"
+  },
+  {
+    "file": "06-cmd-curl-auth-csrf.png",
+    "width": 1330,
+    "height": 970,
+    "sha256": "6156e87c8b364b65a79197e2d15525276d1c6372e8f909d26b2b3d0b0f5258f1"
+  },
+  {
+    "file": "07-cmd-validation-bandit.png",
+    "width": 1330,
+    "height": 970,
+    "sha256": "57736a06232634c68467d151f643ab69c77fc62b703fd8e338671eb81a6f902f"
+  },
+  {
+    "file": "08-web-scanner.png",
+    "width": 2561,
+    "height": 1469,
+    "sha256": "99bab85cc1b76d8697a0e1d8b8ee81a71dc5f143f1fab4e2ec87e08e4364751c"
+  },
+  {
+    "file": "09-web-xss-csrf.png",
+    "width": 2538,
+    "height": 1865,
+    "sha256": "39a07c16942cd4ded0aecb3880fdc37aa5d5f4576676b1a1d391d764b431b06b"
+  },
+  {
+    "file": "10-web-sql-injection.png",
+    "width": 2561,
+    "height": 1469,
+    "sha256": "d59999e4ab40ebfd8ff50e9f65e735ae9a68b1169453042ea970d69364dc293d"
+  },
+  {
+    "file": "11-web-ssrf.png",
+    "width": 2561,
+    "height": 1469,
+    "sha256": "2b3c0df5d352cbdf2ab6f3ac5794fc7fbc4994c4395f6040203ee28d0942c01b"
+  },
+  {
+    "file": "12-web-safe-fixture.png",
+    "width": 2561,
+    "height": 1469,
+    "sha256": "bb1b8a7632737d5bd7a01a0fde01120a57cc0b7f3cfabefb62df0feb1a3701e3"
+  },
+  {
+    "file": "13-web-scope-blocked.png",
+    "width": 2561,
+    "height": 1469,
+    "sha256": "52fcac41abb1e8da4e719677750e2216b01ae498fe2bb5e542e76101c5a93b30"
+  },
+  {
+    "file": "14-web-jwt-oauth-results.png",
+    "width": 2538,
+    "height": 1715,
+    "sha256": "93e984f2bad31843e3f4af00638a46d47d6edbe0f55c597650f89e6699acfc2d"
+  },
+  {
+    "file": "15-desktop-live-browser.png",
+    "width": 2560,
+    "height": 1600,
+    "sha256": "19f814000f350407f56eccde62f77b6b244fe4ce5320dd52be3bcf64c2189554"
+  }
+]

@@ -1,0 +1,30 @@
+test_empty_token (tests.test_csrf.TestCSRF.test_empty_token) ... ok
+test_missing (tests.test_csrf.TestCSRF.test_missing) ... ok
+test_no_state_changing_form (tests.test_csrf.TestCSRF.test_no_state_changing_form) ... ok
+test_one_of_two_forms_missing (tests.test_csrf.TestCSRF.test_one_of_two_forms_missing) ... ok
+test_token_present (tests.test_csrf.TestCSRF.test_token_present) ... ok
+test_external_blocked (tests.test_policy.TestPolicy.test_external_blocked) ... ok
+test_local_target (tests.test_policy.TestPolicy.test_local_target) ... ok
+test_redirect_blocked (tests.test_policy.TestPolicy.test_redirect_blocked) ... ok
+test_nested_and_dict (tests.test_report.TestReport.test_nested_and_dict) ... ok
+test_protected_csrf_not_vulnerability (tests.test_report.TestReport.test_protected_csrf_not_vulnerability) ... ok
+test_single_dict (tests.test_report.TestReport.test_single_dict) ... ok
+test_clean (tests.test_sql_injection.TestSQL.test_clean) ... ok
+test_dbms_catalog (tests.test_sql_injection.TestSQL.test_dbms_catalog) ... ok
+test_indicator (tests.test_sql_injection.TestSQL.test_indicator) ... ok
+test_hostname_substring_not_internal (tests.test_ssrf.TestSSRF.test_hostname_substring_not_internal) ... ok
+test_internal (tests.test_ssrf.TestSSRF.test_internal) ... ok
+test_ipv6 (tests.test_ssrf.TestSSRF.test_ipv6) ... ok
+test_metadata (tests.test_ssrf.TestSSRF.test_metadata) ... ok
+test_public (tests.test_ssrf.TestSSRF.test_public) ... ok
+test_index_template (tests.test_ui.TestUI.test_index_template) ... ok
+test_missing_csrf (tests.test_ui.TestUI.test_missing_csrf) ... ok
+test_result_template_escapes_payload (tests.test_ui.TestUI.test_result_template_escapes_payload) ... ok
+test_escaped_no_finding (tests.test_xss.TestXSS.test_escaped_no_finding) ... ok
+test_non_html_no_finding (tests.test_xss.TestXSS.test_non_html_no_finding) ... ok
+test_reflection_preserves_query (tests.test_xss.TestXSS.test_reflection_preserves_query) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 0.044s
+
+OK

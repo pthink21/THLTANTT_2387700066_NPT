@@ -1,0 +1,11 @@
+{
+  "web_xss_csrf_report": true,
+  "web_sqli_report": true,
+  "web_ssrf_report": true,
+  "web_safe_fixture": true,
+  "web_scope_blocked": true,
+  "xss_browser_dialog": "1",
+  "xss_browser_executed": true,
+  "safe_xss_no_execution": true,
+  "scanner_ui_csrf_missing_rejected": true
+}
