@@ -166,7 +166,7 @@ Bandit bỏ qua thư mục test. Có suppression được ghi rõ tại dòng SQ
 ![Pytest trong CMD](screenshots/03-cmd-jwt-pytest.png)
 ![Validation và Bandit trong CMD](screenshots/07-cmd-validation-bandit.png)
 
-## 7. Tự động chụp ảnh như Buoi3
+
 
 Sau khi cài Google Chrome và dependency dev, tại `Buoi4`:
 
