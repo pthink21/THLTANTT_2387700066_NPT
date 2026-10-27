@@ -1,35 +1,56 @@
-# Buá»•i 5 â€” PhÃ¢n tÃ­ch vÃ  kiá»ƒm thá»­ báº£o máº­t (SAST + DAST)
+# Buổi 5 — Phân tích và kiểm thử bảo mật (SAST + DAST)
 
-**Sinh viÃªn:** Nguyá»…n PhÃºc Thá»‹nh Â· **MSSV:** 2387700066
-**Äá» bÃ i:** `C:\Users\PThinkk\Downloads\lab-05.pdf`, má»¥c 5.1â€“5.4.
+**Sinh viên:** Nguyễn Phúc Thịnh
 
-BÃ i nÃ y xÃ¢y dá»±ng bá»™ quÃ©t SAST Python dá»±a trÃªn AST, xuáº¥t SARIF 2.1.0; vÃ  má»™t ná»n táº£ng DAST demo quan sÃ¡t sá»± kiá»‡n trong tiáº¿n trÃ¬nh, bá»™ nhá»› Python, metadata máº¡ng, cáº£nh bÃ¡o theo rule, sandbox giá»›i háº¡n vÃ  Flask API chá»‰ trÃªn loopback.
+**MSSV:** 2387700066
 
-## MÃ´i trÆ°á»ng vÃ  cÃ i Ä‘áº·t
+**Đề bài:** `lab-05.pdf`, các mục 5.1–5.4.
 
-ÄÃ£ thá»±c thi trÃªn Windows vá»›i Python 3.11.9, pip 24.0, Git 2.55.0.windows.5; Flask 3.1.3. CÃ¡c dependency cáº§n duy nháº¥t lÃ  Flask. Táº¡o venv táº¡i `Buoi5/.venv` (khÃ´ng Ä‘Æ°a vÃ o Git):
+Bài thực hành triển khai bộ phân tích mã tĩnh SAST cho Python và nền tảng phân tích động DAST phục vụ học tập. SAST quét cấu trúc AST mà không chạy mã nguồn; DAST quan sát sự kiện và chỉ số của ứng dụng demo đang chạy. Các ví dụ nguy hiểm chỉ được quét tĩnh, không thực thi.
+
+## 1. Môi trường
+
+Đã xác minh trên Windows với Python 3.11.9, pip 24.0, Git 2.55.0.windows.5 và Flask 3.1.3. Đề bài PDF đã được đọc. Flask là dependency chạy; Pillow được dùng riêng để render ảnh minh chứng từ output đã lưu.
+
+![Môi trường Python và đề bài PDF](screenshots/01-environment.png)
+
+Ảnh tổng hợp môi trường đã dùng. Thông tin nguồn được lưu trong `evidence/environment.txt`.
+
+## 2. Cấu trúc thư mục
+
+```text
+Buoi5/
+├── sast-tool/
+│   ├── examples/             # Mẫu an toàn và mẫu nguy hiểm để quét tĩnh
+│   ├── rules/                # Rule JSON
+│   ├── sast_tool/            # AST, matcher, rule engine, quality, SARIF, CLI
+│   └── tests/
+├── dast-tool/                # Runtime, memory, network, behavior, sandbox, API
+│   └── tests/
+├── screenshots/              # Ảnh minh chứng
+├── evidence/                 # SARIF, output lệnh và phản hồi API
+├── README.md
+└── REPORT.md
+```
+
+![Cấu trúc project SAST và DAST](screenshots/02-project-structure.png)
+
+Ảnh được tạo từ danh sách thư mục thực tế; danh sách nguồn nằm trong `evidence/project-structure.txt`.
+
+## 3. Cài đặt
+
+Từ thư mục `Buoi5`:
 
 ```powershell
-cd Buoi5
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
 ```
 
-## Cáº¥u trÃºc
+`requirements-dev.txt` cài Flask cho API và Pillow cho công cụ render ảnh. Virtual environment bị loại khỏi Git.
 
-```text
-Buoi5/
-â”œâ”€â”€ sast-tool/                 # AST analyzer, rule JSON, CLI, SARIF, tests vÃ  vÃ­ dá»¥
-â”œâ”€â”€ dast-tool/                 # Runtime/memory/network, behavior, sandbox, Flask, tests
-â”œâ”€â”€ screenshots/               # áº¢nh báº±ng chá»©ng render tá»« output lá»‡nh/API tháº­t Ä‘Ã£ lÆ°u
-â”œâ”€â”€ evidence/                  # SARIF vÃ  káº¿t quáº£ HTTP thá»±c táº¿
-â”œâ”€â”€ README.md
-â””â”€â”€ REPORT.md
-```
+## 4. SAST — phân tích tĩnh
 
-## SAST
-
-Cháº¡y tá»« thÆ° má»¥c `Buoi5`:
+Chạy từ thư mục `Buoi5`:
 
 ```powershell
 Push-Location sast-tool
@@ -38,39 +59,47 @@ Push-Location sast-tool
 Pop-Location
 ```
 
-Rule engine Ä‘á»c schema JSON version 1 á»Ÿ `sast-tool/rules/default_rules.json`; má»—i rule cÃ³ thá»ƒ báº­t/táº¯t vÃ  khai bÃ¡o severity, mÃ´ táº£, tÃªn hÃ m. Analyzer khÃ´ng import hay cháº¡y file. Luáº­t demo phÃ¡t hiá»‡n `eval`, `exec`, `os.system`, subprocess cÃ³ `shell=True`, vÃ  truy váº¥n SQL truyá»n f-string/chuá»—i ná»™i suy vÃ o `execute`. Vá»›i SQL, há»— trá»£ gÃ¡n trá»±c tiáº¿p má»™t biáº¿n tá»« f-string/biá»ƒu thá»©c ná»‘i chuá»—i trÆ°á»›c khi gá»i execute; Ä‘Ã¢y khÃ´ng pháº£i phÃ¢n tÃ­ch dataflow tá»•ng quÃ¡t, khÃ´ng theo dÃµi alias/nhÃ¡nh/hÃ m. CÃ³ thá»ƒ cÃ³ false positive/negative.
+Analyzer dùng `ast` để tìm `eval`, `exec`, `os.system`, `subprocess` với `shell=True`, và mẫu SQL interpolation truyền tới `execute`. Rule được cấu hình trong `sast-tool/rules/default_rules.json`; mỗi rule có ID, severity, mô tả và trạng thái bật/tắt. Analyzer xử lý lỗi cú pháp và lỗi đọc file, không import hay thực thi file được quét.
 
-Quality checker bÃ¡o complexity = 1 + sá»‘ node nhÃ¡nh (if, loop, conditional expression, handler, comprehension, match); chiá»u dÃ i tÃ­nh cáº£ dÃ²ng khai bÃ¡o Ä‘áº¿n cuá»‘i thÃ¢n hÃ m; nested depth lÃ  sá»‘ cáº¥u trÃºc Ä‘iá»u khiá»ƒn lá»“ng tá»‘i Ä‘a; dependency count Ä‘áº¿m tÃªn module import duy nháº¥t; smell density = findings Ã— 100 / sá»‘ dÃ²ng nguá»“n. ÄÃ¢y lÃ  heuristic Ä‘á»ƒ Ä‘á»‹nh hÆ°á»›ng review, khÃ´ng pháº£i Ä‘iá»ƒm báº£o máº­t chuáº©n hÃ³a.
+Ví dụ nguy hiểm cho 3 phát hiện: `PY-SQL-FSTRING`, `PY-EVAL`, `PY-SHELL`. Ví dụ an toàn cho 0 phát hiện.
 
-Exit code CLI: 0 khÃ´ng phÃ¡t hiá»‡n, 1 cÃ³ phÃ¡t hiá»‡n, 2 lá»—i cáº¥u hÃ¬nh/I/O. SARIF náº±m á»Ÿ [`evidence/report.sarif`](evidence/report.sarif), JSON parse Ä‘Æ°á»£c, phiÃªn báº£n 2.1.0, cÃ³ rule, severity, message, file vÃ  line. Má»Ÿ báº±ng SARIF Viewer hoáº·c trÃ¬nh soáº¡n tháº£o JSON.
+![Kết quả quét mẫu nguy hiểm](screenshots/03-sast-vulnerabilities.png)
 
-### Káº¿t quáº£ vÃ  áº£nh SAST
+Đây là output thực tế của CLI đã lưu trong `evidence/sast-vulnerable.txt`; file mẫu chỉ được phân tích tĩnh.
 
-![MÃ´i trÆ°á»ng Python vÃ  PDF Ä‘á» bÃ i](screenshots/01-environment.png)
+![Kết quả quét mẫu an toàn](screenshots/04-sast-safe.png)
 
-áº¢nh tá»•ng há»£p xÃ¡c nháº­n Python 3.11.9, pip, Git vÃ  PDF Ä‘á» bÃ i cÃ³ trÃªn mÃ¡y.
+Output thực tế trong `evidence/sast-safe.txt` xác nhận 0 phát hiện.
 
-![Cáº¥u trÃºc thÆ° má»¥c dá»± Ã¡n](screenshots/02-project-structure.png)
+### Rule tùy chỉnh và chỉ số chất lượng
 
-Cáº¥u trÃºc thá»±c táº¿ gá»“m cÃ¡c package SAST vÃ  DAST, test, rule vÃ  vÃ­ dá»¥.
+Rule engine nhận JSON có `version: 1` và danh sách `rules`; kiểm tra kiểu dữ liệu, ID trùng, severity và trường hỗ trợ. Có thể tắt rule bằng `"enabled": false` hoặc thêm rule gọi hàm theo cấu trúc hiện tại.
 
-File cá»‘ Ã½ nguy hiá»ƒm Ä‘Æ°á»£c quÃ©t (khÃ´ng cháº¡y) cÃ³ 3 cáº£nh bÃ¡o: `PY-SQL-FSTRING`, `PY-EVAL`, `PY-SHELL`; file an toÃ n cÃ³ 0 phÃ¡t hiá»‡n.
+Code quality checker báo:
 
-![QuÃ©t máº«u cÃ³ eval, SQL ná»™i suy vÃ  shell=True](screenshots/03-sast-vulnerabilities.png)
+- **Cyclomatic complexity:** bắt đầu từ 1, cộng 1 cho mỗi nhánh/điều kiện trong hàm.
+- **Function length:** số dòng từ khai báo hàm đến dòng cuối thân hàm.
+- **Nested depth:** mức lồng tối đa của cấu trúc điều khiển.
+- **Dependency count:** số tên module import duy nhất.
+- **Security smell density:** số phát hiện trên 100 dòng mã.
 
-áº¢nh nÃ y lÃ  bÃ¡o cÃ¡o áº£nh Ä‘Æ°á»£c render tá»« stdout lá»‡nh SAST Ä‘Ã£ cháº¡y; output gá»‘c Ä‘Æ°á»£c lÆ°u trong `evidence/sast-vulnerable.txt`.
+Đây là heuristic định hướng review, không phải thước đo chuẩn hóa.
 
-![QuÃ©t file an toÃ n](screenshots/04-sast-safe.png)
+### SARIF
 
-Quan sÃ¡t káº¿t quáº£ 0 phÃ¡t hiá»‡n; output lá»‡nh gá»‘c trong `evidence/sast-safe.txt`.
+SARIF được ghi tại [`evidence/report.sarif`](evidence/report.sarif). JSON đã được nạp lại và xác nhận phiên bản 2.1.0 cùng 3 kết quả; mỗi kết quả có rule ID, mức độ, thông điệp và vị trí dòng.
 
-![SARIF Ä‘Ã£ xuáº¥t vÃ  xÃ¡c minh](screenshots/05-sarif-verified.png)
+![SARIF 2.1.0 đã xác minh](screenshots/05-sarif-verified.png)
 
-SARIF Ä‘Ã£ Ä‘Æ°á»£c náº¡p láº¡i báº±ng JSON parser vÃ  xÃ¡c nháº­n 3 result; dá»¯ liá»‡u Ä‘áº§y Ä‘á»§ táº¡i `evidence/report.sarif`.
+Có thể mở file bằng SARIF Viewer hoặc trình soạn thảo JSON.
 
-## DAST
+### Giới hạn SAST
 
-Cháº¡y demo tá»•ng há»£p an toÃ n:
+Phân tích SQL theo dõi trực tiếp biến được gán từ f-string/biểu thức nối chuỗi trước khi gọi `execute`; đây không phải taint analysis tổng quát, không theo dõi alias, luồng liên hàm hay mọi nhánh điều kiện. Công cụ có thể bỏ sót hoặc cảnh báo nhầm.
+
+## 5. DAST — phân tích động
+
+Chạy demo dữ liệu tổng hợp an toàn:
 
 ```powershell
 Push-Location dast-tool
@@ -78,27 +107,39 @@ Push-Location dast-tool
 Pop-Location
 ```
 
-RuntimeMonitor ghi timestamp UTC vÃ  metadata cÃ³ giá»›i háº¡n bá»™ Ä‘á»‡m. MemoryAnalyzer Ä‘o traced Python allocations qua `tracemalloc`; tÄƒng bá»™ nhá»› chá»‰ lÃ  tÃ­n hiá»‡u nghi váº¥n, khÃ´ng chá»©ng minh leak vÃ  khÃ´ng thá»ƒ phÃ¡t hiá»‡n buffer overflow cáº¥p native. NetworkTrafficAnalyzer ghi metadata demo/loopback vÃ  khÃ´ng báº¯t payload hoáº·c sniff lÆ°u lÆ°á»£ng há»‡ thá»‘ng; khÃ´ng cáº§n quyá»n báº¯t gÃ³i. Behavior checker Ã¡p dá»¥ng rule trÃªn cÃ¡c sá»± kiá»‡n demo. VirtualSandbox chá»‰ cho cháº¡y ba snippet cá»‘ Ä‘á»‹nh, cÃ³ timeout, stdout giá»›i háº¡n, working directory táº¡m Ä‘Æ°á»£c dá»n; subprocess váº«n cháº¡y cÃ¹ng user/OS identity, khÃ´ng cÃ³ cÃ´ láº­p syscall, filesystem hay network nhÆ° container/VM.
+Các thành phần gồm:
 
-Khá»Ÿi Ä‘á»™ng API:
+- **RuntimeMonitor:** ghi sự kiện có timestamp UTC, metadata và giới hạn số sự kiện lưu.
+- **MemoryAnalyzer:** đo allocation Python bằng `tracemalloc` và báo mức tăng nghi vấn.
+- **NetworkTrafficAnalyzer:** chỉ ghi metadata demo/loopback; không bắt payload hay sniff lưu lượng hệ thống.
+- **SecurityBehaviorChecker:** so khớp sự kiện với rule cảnh báo và giải thích lý do.
+- **VirtualSandbox:** chỉ chạy snippet allow-list, có timeout, giới hạn output và dọn thư mục tạm.
+
+![Demo runtime, bộ nhớ và sandbox](screenshots/07-dast-runtime-demo.png)
+
+Output demo thực tế được lưu tại `evidence/dast-demo.json`; sandbox kết thúc với mã 0 và thư mục tạm được dọn.
+
+### Flask API
+
+Khởi động từ `Buoi5`:
 
 ```powershell
 Push-Location dast-tool
 ..\.venv\Scripts\python.exe -X utf8 app.py
-# Ctrl+C Ä‘á»ƒ dá»«ng
+# Dừng bằng Ctrl+C
 ```
 
-Máº·c Ä‘á»‹nh bind `127.0.0.1:5055`, debug táº¯t. Endpoint:
+API mặc định chỉ bind `127.0.0.1:5055`, tắt debug. Các endpoint:
 
-| Method | Path | Chá»©c nÄƒng |
+| Method | Đường dẫn | Chức năng |
 |---|---|---|
-| GET | `/api/health` | TÃ¬nh tráº¡ng service vÃ  monitor |
-| GET | `/api/status` | Snapshot memory vÃ  metadata máº¡ng |
-| GET | `/api/events?limit=100` | Sá»± kiá»‡n gáº§n nháº¥t; `limit` tá»« 1 Ä‘áº¿n 200 |
-| GET | `/api/alerts` | Cáº£nh bÃ¡o theo rule |
-| POST | `/api/demo/event` | ThÃªm sá»± kiá»‡n demo allow-list |
+| GET | `/api/health` | Trạng thái service và monitor |
+| GET | `/api/status` | Snapshot bộ nhớ và metadata mạng |
+| GET | `/api/events?limit=100` | Sự kiện gần nhất; `limit` từ 1 đến 200 |
+| GET | `/api/alerts` | Cảnh báo theo rule |
+| POST | `/api/demo/event` | Thêm sự kiện demo thuộc allow-list |
 
-VÃ­ dá»¥ PowerShell:
+Ví dụ PowerShell:
 
 ```powershell
 Invoke-RestMethod http://127.0.0.1:5055/api/health
@@ -108,17 +149,19 @@ Invoke-RestMethod -Method Post -Uri http://127.0.0.1:5055/api/demo/event `
 Invoke-RestMethod http://127.0.0.1:5055/api/alerts
 ```
 
-Endpoint demo chá»‰ nháº­n `process.spawn`, `command.shell`, `demo.normal`, khÃ´ng thá»±c thi lá»‡nh. JSON sai hoáº·c giá»›i háº¡n sai nháº­n HTTP 400. á»¨ng dá»¥ng khÃ´ng cÃ³ API cháº¡y Python/shell hay Ä‘á»c/ghi file.
+Kiểm tra HTTP trên server loopback thực tế: health 200, status 200, gửi demo event 201, alerts 200 và `limit=999` trả 400. Kết quả được lưu trong `evidence/api-smoke.json`.
 
-![Demo runtime vÃ  sandbox](screenshots/07-dast-runtime-demo.png)
+![Kết quả gọi Flask API loopback](screenshots/09-api-smoke.png)
 
-Output demo thá»±c táº¿ gá»“m process event, cáº£nh bÃ¡o vÃ  sandbox káº¿t thÃºc thÃ nh cÃ´ng; JSON gá»‘c á»Ÿ `evidence/dast-demo.json`.
+Endpoint demo chỉ nhận `process.spawn`, `command.shell`, `demo.normal`; endpoint không thực thi shell/Python và không cung cấp thao tác đọc/ghi file tùy ý.
 
-![Flask API loopback vÃ  endpoint thá»±c táº¿](screenshots/09-api-smoke.png)
+### Giới hạn DAST và sandbox
 
-Flask Ä‘Æ°á»£c khá»Ÿi Ä‘á»™ng thá»±c táº¿; health tráº£ 200/status ok, POST demo tráº£ 201, cáº£nh bÃ¡o Ä‘Æ°á»£c táº¡o, `limit=999` tráº£ 400. Output API Ä‘Ã£ lÆ°u táº¡i `evidence/api-smoke.json`.
+`tracemalloc` chỉ quan sát allocation Python; tăng bộ nhớ không chứng minh memory leak và không phát hiện buffer overflow cấp native. Network analyzer không sniff packet. Sandbox dùng subprocess, thư mục tạm và timeout nhưng vẫn chạy cùng tài khoản hệ điều hành; không có cô lập syscall, filesystem hay network như VM/container. Không dùng để chạy malware hoặc mã không tin cậy. Flask development server chỉ dùng trong lab local.
 
-## Kiá»ƒm thá»­
+## 6. Kiểm thử
+
+Chạy unit tests:
 
 ```powershell
 Push-Location sast-tool
@@ -129,44 +172,33 @@ Push-Location dast-tool
 Pop-Location
 ```
 
-Káº¿t quáº£ thá»±c táº¿: SAST **8/8 PASS**, DAST **6/6 PASS**, tá»•ng **14 PASS, 0 FAIL, 0 SKIP**. Test API dÃ¹ng Flask test client; kiá»ƒm tra endpoint qua server loopback riÃªng Ä‘Æ°á»£c thá»±c hiá»‡n bá»• sung báº±ng HTTP tháº­t. áº¢nh test Ä‘Æ°á»£c render tá»« output test Ä‘Ã£ cháº¡y vÃ  lÆ°u, khÃ´ng pháº£i áº£nh chá»¥p cá»­a sá»• desktop.
+Kết quả đã chạy: **SAST 8/8 PASS**, **DAST 6/6 PASS**, tổng **14 PASS, 0 FAIL, 0 SKIP**. Test bao gồm phát hiện và file an toàn, lỗi cú pháp/cấu hình, SARIF, quality metrics, runtime, memory, network scope, cảnh báo, sandbox và API.
 
-![Unit tests SAST: 8 passed](screenshots/06-sast-tests.png)
+![Unit tests SAST: 8 tests đạt](screenshots/06-sast-tests.png)
 
-![Unit tests DAST: 6 passed](screenshots/10-dast-tests.png)
+![Unit tests DAST: 6 tests đạt](screenshots/10-dast-tests.png)
 
-![Tá»•ng há»£p tÃ­ch há»£p: 14 passed, SARIF vÃ  API Ä‘Ã£ xÃ¡c minh](screenshots/11-integration-summary.png)
+![Tổng hợp kiểm thử, SARIF và API](screenshots/11-integration-summary.png)
 
-## SAST vÃ  DAST
+Output test gốc nằm trong `evidence/sast-tests.txt` và `evidence/dast-tests.txt`; script `evidence/capture_test_output.py` chạy lại và lưu output UTF‑8.
 
-SAST Ä‘á»c cáº¥u trÃºc mÃ£ nguá»“n mÃ  khÃ´ng cháº¡y chÆ°Æ¡ng trÃ¬nh, phÃ¹ há»£p phÃ¡t hiá»‡n sá»›m máº«u nguy hiá»ƒm. DAST quan sÃ¡t tráº¡ng thÃ¡i/hÃ nh vi á»©ng dá»¥ng Ä‘ang cháº¡y trong demo; nÃ³ chá»‰ tháº¥y cÃ¡c sá»± kiá»‡n Ä‘Ã£ instrument, khÃ´ng pháº£i monitor toÃ n há»‡ Ä‘iá»u hÃ nh. Hai cÃ¡ch kiá»ƒm thá»­ bá»• trá»£ nhau.
+## 7. Danh mục ảnh minh chứng
 
-## Giá»›i háº¡n vÃ  lÆ°u Ã½
+Các PNG dưới đây là ảnh báo cáo được render từ output lệnh/HTTP thực tế đã lưu. Chúng không phải ảnh chụp giao diện desktop; nội dung nguồn được ghi trên từng ảnh và nằm trong `evidence/`. Mỗi ảnh đã được mở kiểm tra và xác minh là PNG hợp lệ.
 
-- ÄÃ¢y lÃ  cÃ´ng cá»¥ há»c táº­p, khÃ´ng thay tháº¿ Bandit, Semgrep, CodeQL, fuzzing hay kiá»ƒm thá»­ chuyÃªn sÃ¢u.
-- AST rules khÃ´ng thá»±c hiá»‡n taint analysis hay phÃ¢n tÃ­ch liÃªn thá»§ tá»¥c.
-- Theo dÃµi network chá»‰ láº¥y metadata Ä‘Ã£ khai bÃ¡o trong demo, khÃ´ng báº¯t gÃ³i.
-- Sandbox subprocess khÃ´ng pháº£i biÃªn cÃ´ láº­p an toÃ n Ä‘á»ƒ cháº¡y pháº§n má»m Ä‘á»™c háº¡i; chá»‰ dÃ¹ng snippet allow-list cÃ³ trong mÃ£.
-- Flask development server chá»‰ phá»¥c vá»¥ local lab, khÃ´ng triá»ƒn khai production.
-- KhÃ´ng cháº¡y `examples/vulnerable_01.py`; chá»‰ Ä‘Æ°a file cho analyzer.
-
-## Danh má»¥c áº£nh minh chá»©ng
-
-áº¢nh PNG trong thÆ° má»¥c nÃ y lÃ  báº£n render tá»« stdout/output lá»‡nh hoáº·c HTTP response tháº­t Ä‘Ã£ lÆ°u kÃ¨m; Ä‘Ã¢y khÃ´ng pháº£i screenshot giao diá»‡n desktop. ÄÃ£ má»Ÿ kiá»ƒm tra tá»«ng PNG vÃ  Ä‘á»‘i chiáº¿u file output nguá»“n.
-
-| áº¢nh | Ná»™i dung | Tráº¡ng thÃ¡i |
+| File | Nội dung | Trạng thái |
 |---|---|---|
-| `01-environment.png` | Python/dependency vÃ  PDF Ä‘á» bÃ i | VERIFIED |
-| `02-project-structure.png` | Cáº¥u trÃºc package, test, rules | VERIFIED |
-| `03-sast-vulnerabilities.png` | Ba rule SAST trÃªn máº«u khÃ´ng an toÃ n | VERIFIED |
-| `04-sast-safe.png` | Máº«u an toÃ n, 0 findings | VERIFIED |
-| `05-sarif-verified.png` | SARIF 2.1.0 vÃ  3 results | VERIFIED |
+| `01-environment.png` | Python, Git, Flask và PDF đề bài | VERIFIED |
+| `02-project-structure.png` | Cấu trúc project | VERIFIED |
+| `03-sast-vulnerabilities.png` | Phát hiện SAST trên mẫu nguy hiểm | VERIFIED |
+| `04-sast-safe.png` | Quét mẫu an toàn | VERIFIED |
+| `05-sarif-verified.png` | SARIF 2.1.0 và 3 kết quả | VERIFIED |
 | `06-sast-tests.png` | 8 unit tests SAST | VERIFIED |
-| `07-dast-runtime-demo.png` | Runtime event, alert, sandbox demo | VERIFIED |
-| `09-api-smoke.png` | HTTP loopback, status/alert vÃ  validation | VERIFIED |
+| `07-dast-runtime-demo.png` | Runtime, memory và sandbox | VERIFIED |
+| `09-api-smoke.png` | Phản hồi Flask API loopback | VERIFIED |
 | `10-dast-tests.png` | 6 unit tests DAST | VERIFIED |
-| `11-integration-summary.png` | Káº¿t quáº£ tá»•ng há»£p vÃ  sá»‘ tests | VERIFIED |
+| `11-integration-summary.png` | Kết quả tổng hợp | VERIFIED |
 
-## Nháº­n xÃ©t vÃ  káº¿t luáº­n
+## 8. Kết luận
 
-ÄÃ£ triá»ƒn khai cÃ¡c thÃ nh pháº§n trá»ng tÃ¢m trong Ä‘á», xÃ¡c minh Ä‘Æ°á»£c phÃ¡t hiá»‡n SAST, káº¿t quáº£ SARIF, hÃ nh vi demo DAST vÃ  Flask API loopback. Má»i test Ä‘Ã£ cháº¡y Ä‘áº¡t. CÃ¡c giá»›i háº¡n phÃ¢n tÃ­ch luá»“ng dá»¯ liá»‡u, giÃ¡m sÃ¡t há»‡ thá»‘ng vÃ  cÃ´ láº­p sandbox Ä‘Æ°á»£c giá»¯ rÃµ trong bÃ¡o cÃ¡o Ä‘á»ƒ khÃ´ng nháº§m prototype há»c táº­p vá»›i cÃ´ng cá»¥ production.
+Đã triển khai các thành phần chính theo mục 5.1–5.4, quét được mẫu nguy hiểm, tạo SARIF hợp lệ, chạy API local và hoàn tất 14 unit tests. SAST và DAST bổ trợ nhau: SAST kiểm tra cấu trúc mã trước khi chạy; DAST quan sát các hành vi đã instrument trong lúc ứng dụng demo chạy. Các giới hạn về dataflow, giám sát hệ thống và cô lập sandbox được nêu rõ để tránh hiểu prototype học tập thành công cụ production.
