@@ -1,0 +1,9 @@
+C:\Users\PThinkk\THLTANTT\Buoi5\sast-tool\examples
+C:\Users\PThinkk\THLTANTT\Buoi5\sast-tool\rules
+C:\Users\PThinkk\THLTANTT\Buoi5\sast-tool\sast_tool
+C:\Users\PThinkk\THLTANTT\Buoi5\sast-tool\tests
+C:\Users\PThinkk\THLTANTT\Buoi5\sast-tool\sast_tool\__pycache__
+C:\Users\PThinkk\THLTANTT\Buoi5\sast-tool\tests\__pycache__
+C:\Users\PThinkk\THLTANTT\Buoi5\dast-tool\tests
+C:\Users\PThinkk\THLTANTT\Buoi5\dast-tool\__pycache__
+C:\Users\PThinkk\THLTANTT\Buoi5\dast-tool\tests\__pycache__

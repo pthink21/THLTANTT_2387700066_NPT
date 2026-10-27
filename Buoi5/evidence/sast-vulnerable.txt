@@ -1,0 +1,6 @@
+examples\vulnerable_01.py:6: WARNING PY-SQL-FSTRING: Truy vấn SQL nội suy chuỗi có thể gây SQL injection.
+examples\vulnerable_01.py:7: ERROR PY-EVAL: eval() có thể thực thi biểu thức không tin cậy.
+examples\vulnerable_01.py:10: ERROR PY-SHELL: Lệnh hệ thống với shell=True có nguy cơ command injection.
+Tổng: 3 phát hiện
+SARIF: ..\evidence\report.sarif
+{"path": "examples\\vulnerable_01.py", "functions": [{"name": "lookup", "line": 4, "cyclomatic_complexity": 1, "length_lines": 4, "nested_depth": 0}, {"name": "run_command", "line": 9, "cyclomatic_complexity": 1, "length_lines": 2, "nested_depth": 0}], "dependency_count": 1, "security_smell_count": 3, "security_smell_density_per_100_loc": 30.0}

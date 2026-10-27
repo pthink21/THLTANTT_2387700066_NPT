@@ -1,0 +1,13 @@
+test_detects_eval_exec_shell_sql (test_sast.SastTests.test_detects_eval_exec_shell_sql) ... ok
+test_disabled_rule (test_sast.SastTests.test_disabled_rule) ... ok
+test_invalid_schema (test_sast.SastTests.test_invalid_schema) ... ok
+test_quality_metrics (test_sast.SastTests.test_quality_metrics) ... ok
+test_safe_source (test_sast.SastTests.test_safe_source) ... ok
+test_sarif_json (test_sast.SastTests.test_sarif_json) ... ok
+test_syntax_error (test_sast.SastTests.test_syntax_error) ... ok
+test_unreadable_path (test_sast.SastTests.test_unreadable_path) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.002s
+
+OK

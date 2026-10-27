@@ -1,0 +1,3 @@
+-r sast-tool/requirements.txt
+-r dast-tool/requirements.txt
+Pillow>=10,<13

@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "rules": [
+    {"id":"PY-EVAL","enabled":true,"severity":"error","description":"eval() có thể thực thi biểu thức không tin cậy.","calls":["eval"]},
+    {"id":"PY-EXEC","enabled":true,"severity":"error","description":"exec() có thể thực thi mã động không tin cậy.","calls":["exec"]},
+    {"id":"PY-SHELL","enabled":true,"severity":"error","description":"Lệnh hệ thống với shell=True có nguy cơ command injection.","calls":["subprocess.run","subprocess.call","subprocess.Popen","subprocess.check_output","subprocess.check_call"]},
+    {"id":"PY-OS-SYSTEM","enabled":true,"severity":"warning","description":"os.system() thực thi lệnh qua shell; ưu tiên API subprocess an toàn.","calls":["os.system"]},
+    {"id":"PY-SQL-FSTRING","enabled":true,"severity":"warning","description":"Truy vấn SQL nội suy chuỗi có thể gây SQL injection.","calls":["execute","executemany"],"sql_interpolation":true}
+  ]
+}

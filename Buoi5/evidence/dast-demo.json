@@ -1,0 +1,42 @@
+{
+  "sandbox": {
+    "returncode": 0,
+    "stdout": "allocated demo bytes: 131072\n",
+    "stderr": "",
+    "timed_out": false,
+    "isolation": "temporary cwd + allow-list + timeout; same OS identity, no syscall/resource namespace isolation",
+    "workdir_cleaned": true
+  },
+  "memory": {
+    "current_bytes": 43412,
+    "peak_bytes": 86903,
+    "growth_since_baseline_bytes": 43412,
+    "growth_suspected": false,
+    "interpretation": "Tăng bộ nhớ là dấu hiệu cần điều tra; không chứng minh memory leak hoặc buffer overflow."
+  },
+  "events": [
+    {
+      "timestamp": "2026-10-27T16:55:10.371582+00:00",
+      "type": "monitor.started",
+      "metadata": {
+        "scope": "demo-process"
+      }
+    },
+    {
+      "timestamp": "2026-10-27T16:55:10.371582+00:00",
+      "type": "process.spawn",
+      "metadata": {
+        "name": "python-demo"
+      }
+    }
+  ],
+  "alerts": [
+    {
+      "rule_id": "DAST-PROCESS-SPAWN",
+      "severity": "warning",
+      "description": "Tiến trình con được tạo trong sandbox demo.",
+      "reason": "Sự kiện process.spawn cần được rà soát.",
+      "timestamp": "2026-10-27T16:55:10.371582+00:00"
+    }
+  ]
+}

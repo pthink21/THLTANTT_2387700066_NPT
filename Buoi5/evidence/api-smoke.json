@@ -1,0 +1,50 @@
+﻿{
+    "health":  {
+                   "bind":  "127.0.0.1",
+                   "monitoring":  true,
+                   "status":  "ok"
+               },
+    "status":  {
+                   "memory":  {
+                                  "current_bytes":  215778,
+                                  "growth_since_baseline_bytes":  215778,
+                                  "growth_suspected":  false,
+                                  "interpretation":  "Tăng bộ nhớ là dấu hiệu cần điều tra; không chứng minh memory leak hoặc buffer overflow.",
+                                  "peak_bytes":  10216016
+                              },
+                   "network":  {
+                                   "available":  true,
+                                   "connections":  [
+                                                       {
+                                                           "family":  "23",
+                                                           "host":  "localhost",
+                                                           "protocol":  "0",
+                                                           "socket_type":  "0"
+                                                       },
+                                                       {
+                                                           "family":  "2",
+                                                           "host":  "localhost",
+                                                           "protocol":  "0",
+                                                           "socket_type":  "0"
+                                                       }
+                                                   ],
+                                   "payload_collected":  false,
+                                   "source":  "getaddrinfo metadata demo"
+                               }
+               },
+    "demo_event":  {
+                       "recorded":  "command.shell"
+                   },
+    "alerts":  {
+                   "alerts":  [
+                                  {
+                                      "description":  "Có yêu cầu shell execution trong demo.",
+                                      "reason":  "Sự kiện command.shell cần được rà soát.",
+                                      "rule_id":  "DAST-COMMAND-SHELL",
+                                      "severity":  "warning",
+                                      "timestamp":  "2026-10-27T16:54:04.366941+00:00"
+                                  }
+                              ]
+               },
+    "invalid_limit_http":  400
+}
