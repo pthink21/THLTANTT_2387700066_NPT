@@ -1,0 +1,111 @@
+stages:
+  - validate
+  - test
+  - security
+  - dast
+  - package
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  DOCKER_TLS_CERTDIR: "/certs"
+  IMAGE_TAG: "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
+
+cache:
+  key: "$CI_COMMIT_REF_SLUG"
+  paths:
+    - .cache/pip
+
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH'
+
+validate-yaml:
+  stage: validate
+  image: python:3.12-slim
+  script:
+    - pip install PyYAML==6.0.2
+    - python -c "import yaml; yaml.safe_load(open('.gitlab-ci.yml', encoding='utf-8')); print('GitLab CI YAML: valid')"
+
+unit-tests:
+  stage: test
+  image: python:3.12-slim
+  script:
+    - pip install -r requirements-dev.txt
+    - pytest -q --junitxml=report.xml
+  artifacts:
+    when: always
+    reports:
+      junit: report.xml
+
+sast-bandit:
+  stage: security
+  image: python:3.12-slim
+  script:
+    - pip install bandit==1.8.3
+    - bandit -r app.py -ll
+
+dependency-audit:
+  stage: security
+  image: python:3.12-slim
+  script:
+    - pip install pip-audit
+    - pip-audit -r requirements.txt
+
+secret-scan:
+  stage: security
+  image:
+    name: zricethezav/gitleaks:v8.24.2
+    entrypoint: [""]
+  script:
+    - gitleaks detect --source . --no-git --redact --exit-code 1
+
+iac-check:
+  stage: security
+  image:
+    name: bridgecrew/checkov:3.2.392
+    entrypoint: [""]
+  script:
+    - checkov -d . --framework dockerfile --quiet
+
+dast-zap:
+  stage: dast
+  image: docker:27.5.1-cli
+  services:
+    - name: docker:27.5.1-dind
+      command: ["--tls=true"]
+  variables:
+    DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_VERIFY: "1"
+    DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
+  script:
+    - docker build -t devsecops-demo:$CI_COMMIT_SHA .
+    - docker run -d --name demo -p 8000:8000 devsecops-demo:$CI_COMMIT_SHA
+    - for attempt in $(seq 1 30); do wget -qO- http://docker:8000/health && ready=1 && break || sleep 2; done
+    - test "$ready" = 1
+    - docker run --rm --network host -v "$CI_PROJECT_DIR:/zap/wrk/:rw" ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://127.0.0.1:8000 -m 1 -I -r zap-report.html
+  artifacts:
+    when: always
+    paths:
+      - zap-report.html
+    expire_in: 1 week
+
+container-build-scan:
+  stage: package
+  image: docker:27.5.1-cli
+  services:
+    - name: docker:27.5.1-dind
+      command: ["--tls=true"]
+  variables:
+    DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_VERIFY: "1"
+    DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
+  script:
+    - docker build --pull -t "$IMAGE_TAG" .
+    - docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.58.2 image --exit-code 1 --severity CRITICAL,HIGH "$IMAGE_TAG"
+    - docker push "$IMAGE_TAG"
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+
+# Protected deployment credentials belong in GitLab CI/CD masked variables.
+# Add a deploy job only after configuring a protected production environment.
