@@ -1,0 +1,24 @@
+:root {
+  --ifm-color-primary: #8eb746;
+  --ifm-color-primary-dark: #7ca33b;
+  --ifm-color-primary-darker: #759a38;
+  --ifm-color-primary-darkest: #607f2e;
+  --ifm-color-primary-light: #a0c25b;
+  --ifm-color-primary-lighter: #a8c767;
+  --ifm-color-primary-lightest: #c0d98d;
+  --ifm-font-family-base: Inter, 'Segoe UI', sans-serif;
+  --ifm-font-family-monospace: 'Cascadia Code', Consolas, monospace;
+  --ifm-background-color: #0a0d0b;
+  --ifm-navbar-background-color: #0a0d0b;
+  --ifm-footer-background-color: #080b09;
+}
+
+html[data-theme='dark'] { --ifm-background-color: #0a0d0b; --ifm-background-surface-color: #101512; }
+.navbar { border-bottom: 1px solid #202721; box-shadow: none; }
+.navbar__title { font: 500 12px var(--ifm-font-family-monospace); letter-spacing: .12em; }
+.navbar__logo { height: 23px; }
+.footer { border-top: 1px solid #202721; }
+.theme-doc-markdown { max-width: 820px; }
+.theme-doc-markdown h1 { letter-spacing: -.04em; }
+.theme-doc-markdown h2 { margin-top: 2.2rem; border-bottom: 1px solid #273029; padding-bottom: .45rem; }
+.theme-doc-markdown table { display: table; width: 100%; }

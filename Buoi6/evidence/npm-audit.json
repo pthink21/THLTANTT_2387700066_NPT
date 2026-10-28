@@ -1,0 +1,136 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "@docusaurus/plugin-svgr": {
+      "name": "@docusaurus/plugin-svgr",
+      "severity": "low",
+      "isDirect": false,
+      "via": [
+        "@svgr/webpack"
+      ],
+      "effects": [
+        "@docusaurus/preset-classic"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@docusaurus/plugin-svgr"
+      ],
+      "fixAvailable": {
+        "name": "@docusaurus/preset-classic",
+        "version": "3.6.3",
+        "isSemVerMajor": true
+      }
+    },
+    "@docusaurus/preset-classic": {
+      "name": "@docusaurus/preset-classic",
+      "severity": "low",
+      "isDirect": true,
+      "via": [
+        "@docusaurus/plugin-svgr"
+      ],
+      "effects": [],
+      "range": ">=3.7.0-canary-6191",
+      "nodes": [
+        "node_modules/@docusaurus/preset-classic"
+      ],
+      "fixAvailable": {
+        "name": "@docusaurus/preset-classic",
+        "version": "3.6.3",
+        "isSemVerMajor": true
+      }
+    },
+    "@svgr/plugin-svgo": {
+      "name": "@svgr/plugin-svgo",
+      "severity": "low",
+      "isDirect": false,
+      "via": [
+        "deepmerge"
+      ],
+      "effects": [
+        "@svgr/webpack"
+      ],
+      "range": ">=5.5.0",
+      "nodes": [
+        "node_modules/@svgr/plugin-svgo"
+      ],
+      "fixAvailable": {
+        "name": "@docusaurus/preset-classic",
+        "version": "3.6.3",
+        "isSemVerMajor": true
+      }
+    },
+    "@svgr/webpack": {
+      "name": "@svgr/webpack",
+      "severity": "low",
+      "isDirect": false,
+      "via": [
+        "@svgr/plugin-svgo"
+      ],
+      "effects": [
+        "@docusaurus/plugin-svgr"
+      ],
+      "range": ">=5.5.0",
+      "nodes": [
+        "node_modules/@svgr/webpack"
+      ],
+      "fixAvailable": {
+        "name": "@docusaurus/preset-classic",
+        "version": "3.6.3",
+        "isSemVerMajor": true
+      }
+    },
+    "deepmerge": {
+      "name": "deepmerge",
+      "severity": "low",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1243505,
+          "name": "deepmerge",
+          "dependency": "deepmerge",
+          "title": "deepmerge mergeObject() allows prototype poisoning of returned objects",
+          "url": "https://github.com/advisories/GHSA-gcqx-w48m-w2h4",
+          "severity": "low",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N"
+          },
+          "range": ">=4.2.0 <=4.3.1"
+        }
+      ],
+      "effects": [
+        "@svgr/plugin-svgo"
+      ],
+      "range": ">=4.2.0",
+      "nodes": [
+        "node_modules/deepmerge"
+      ],
+      "fixAvailable": {
+        "name": "@docusaurus/preset-classic",
+        "version": "3.6.3",
+        "isSemVerMajor": true
+      }
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 5,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 5
+    },
+    "dependencies": {
+      "prod": 1272,
+      "dev": 1,
+      "optional": 2,
+      "peer": 1,
+      "peerOptional": 0,
+      "total": 1275
+    }
+  }
+}

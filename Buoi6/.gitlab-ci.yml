@@ -1,111 +1,81 @@
-stages:
-  - validate
-  - test
-  - security
-  - dast
-  - package
+stages: [test, security, build, deploy]
 
 variables:
-  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
-  DOCKER_TLS_CERTDIR: "/certs"
-  IMAGE_TAG: "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
+  NPM_CONFIG_CACHE: "$CI_PROJECT_DIR/Buoi6/.npm"
+  NPM_CONFIG_AUDIT: "false"
+  NPM_CONFIG_FUND: "false"
 
-cache:
-  key: "$CI_COMMIT_REF_SLUG"
-  paths:
-    - .cache/pip
-
-workflow:
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-    - if: '$CI_COMMIT_BRANCH'
-
-validate-yaml:
-  stage: validate
-  image: python:3.12-slim
-  script:
-    - pip install PyYAML==6.0.2
-    - python -c "import yaml; yaml.safe_load(open('.gitlab-ci.yml', encoding='utf-8')); print('GitLab CI YAML: valid')"
+default:
+  image: node:24-bookworm-slim
+  before_script:
+    - cd Buoi6
+    - npm ci --cache "$NPM_CONFIG_CACHE" --prefer-offline
+  cache:
+    key:
+      files: [Buoi6/package-lock.json]
+    paths: [Buoi6/.npm/]
 
 unit-tests:
   stage: test
-  image: python:3.12-slim
   script:
-    - pip install -r requirements-dev.txt
-    - pytest -q --junitxml=report.xml
-  artifacts:
-    when: always
-    reports:
-      junit: report.xml
+    - npm test
 
-sast-bandit:
+security-check:
   stage: security
-  image: python:3.12-slim
   script:
-    - pip install bandit==1.8.3
-    - bandit -r app.py -ll
+    - npm run security
 
 dependency-audit:
   stage: security
-  image: python:3.12-slim
   script:
-    - pip install pip-audit
-    - pip-audit -r requirements.txt
+    - npm run audit
+  artifacts:
+    when: always
+    paths:
+      - Buoi6/evidence/npm-audit.json
+    expire_in: 7 days
+
+semgrep:
+  stage: security
+  image:
+    name: semgrep/semgrep:1.182.0
+    entrypoint: [""]
+  before_script: []
+  cache: []
+  script:
+    - semgrep scan --config p/javascript --error --metrics=off Buoi6/src Buoi6/scripts
 
 secret-scan:
   stage: security
   image:
-    name: zricethezav/gitleaks:v8.24.2
+    name: zricethezav/gitleaks:v8.30.1
     entrypoint: [""]
+  before_script: []
+  cache: []
   script:
-    - gitleaks detect --source . --no-git --redact --exit-code 1
+    - gitleaks dir Buoi6 --redact --exit-code 1
 
-iac-check:
-  stage: security
-  image:
-    name: bridgecrew/checkov:3.2.392
-    entrypoint: [""]
+build-job:
+  stage: build
   script:
-    - checkov -d . --framework dockerfile --quiet
-
-dast-zap:
-  stage: dast
-  image: docker:27.5.1-cli
-  services:
-    - name: docker:27.5.1-dind
-      command: ["--tls=true"]
-  variables:
-    DOCKER_HOST: tcp://docker:2376
-    DOCKER_TLS_VERIFY: "1"
-    DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
-  script:
-    - docker build -t devsecops-demo:$CI_COMMIT_SHA .
-    - docker run -d --name demo -p 8000:8000 devsecops-demo:$CI_COMMIT_SHA
-    - for attempt in $(seq 1 30); do wget -qO- http://docker:8000/health && ready=1 && break || sleep 2; done
-    - test "$ready" = 1
-    - docker run --rm --network host -v "$CI_PROJECT_DIR:/zap/wrk/:rw" ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://127.0.0.1:8000 -m 1 -I -r zap-report.html
+    - npm run build
+    - npm run checksums
   artifacts:
-    when: always
     paths:
-      - zap-report.html
-    expire_in: 1 week
+      - Buoi6/build/
+      - Buoi6/reports/build-sha256.json
+    expire_in: 7 days
 
-container-build-scan:
-  stage: package
-  image: docker:27.5.1-cli
-  services:
-    - name: docker:27.5.1-dind
-      command: ["--tls=true"]
-  variables:
-    DOCKER_HOST: tcp://docker:2376
-    DOCKER_TLS_VERIFY: "1"
-    DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
+pages:
+  stage: deploy
+  before_script: []
+  cache: []
+  dependencies: [build-job]
   script:
-    - docker build --pull -t "$IMAGE_TAG" .
-    - docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.58.2 image --exit-code 1 --severity CRITICAL,HIGH "$IMAGE_TAG"
-    - docker push "$IMAGE_TAG"
+    - mv Buoi6/build public
+  pages:
+    publish: public
+  artifacts:
+    paths: [public/]
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
-
-# Protected deployment credentials belong in GitLab CI/CD masked variables.
-# Add a deploy job only after configuring a protected production environment.

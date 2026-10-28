@@ -1,0 +1,4 @@
+hello-job:
+  script:
+    - echo "Hello, $GITLAB_USER_LOGIN!"
+    - date

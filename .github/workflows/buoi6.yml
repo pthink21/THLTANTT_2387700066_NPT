@@ -1,0 +1,27 @@
+name: Buoi6 DevSecOps checks
+
+on:
+  pull_request:
+    paths: ["Buoi6/**"]
+  push:
+    branches: [main]
+    paths: ["Buoi6/**"]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Buoi6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: Buoi6/package-lock.json
+      - run: npm ci
+      - run: npm run verify

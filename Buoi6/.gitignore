@@ -1,9 +1,12 @@
+node_modules/
+.docusaurus/
+build/
+.npm/
 .venv/
 __pycache__/
 .pytest_cache/
-.coverage
-htmlcov/
 *.py[cod]
+reports/*.xml
+reports/*.log
+*.tmp
 .env
-!.env.example
-reports/
