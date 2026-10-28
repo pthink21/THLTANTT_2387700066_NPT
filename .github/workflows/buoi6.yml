@@ -24,4 +24,13 @@ jobs:
           cache: npm
           cache-dependency-path: Buoi6/package-lock.json
       - run: npm ci
-      - run: npm run verify
+      - name: Unit tests
+        run: npm test
+      - name: Security policy and evidence integrity
+        run: npm run security
+      - name: Dependency audit
+        run: npm run audit
+      - name: Production build
+        run: npm run build
+      - name: Build artifact checksums
+        run: npm run checksums

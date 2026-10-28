@@ -24,5 +24,7 @@ test('Pages deploy is limited to the default branch', () => {
 test('GitHub Actions mirror runs the Buoi6 verification workflow', async () => {
   const workflow = await readFile(new URL('../../.github/workflows/buoi6.yml', import.meta.url), 'utf8');
   assert.ok(workflow.includes('working-directory: Buoi6'));
-  assert.ok(workflow.includes('npm run verify'));
+  for (const command of ['npm test', 'npm run security', 'npm run audit', 'npm run build', 'npm run checksums']) {
+    assert.ok(workflow.includes(`run: ${command}`));
+  }
 });
