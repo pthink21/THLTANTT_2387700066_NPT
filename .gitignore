@@ -40,6 +40,9 @@ gitsecure.log
 secure.log
 secure.log.sig
 logs/
+!Buoi6/evidence/logs/
+!Buoi6/evidence/logs/*.txt
+Buoi6/evidence/logs/preview-server.txt
 
 # OS
 .DS_Store

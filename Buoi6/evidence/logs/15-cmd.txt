@@ -1,0 +1,10 @@
+Student: Nguyen Phuc Thinh | Student ID: 2387700066
+CMD: npm.cmd run checksums
+Completed: 2026-10-28 13:31:52 +07:00
+Exit code: 0
+
+
+> buoi6-devsecops-2387700066@1.0.0 checksums
+> node scripts/checksums.mjs
+
+SHA-256 manifest: 55 files → reports\build-sha256.json

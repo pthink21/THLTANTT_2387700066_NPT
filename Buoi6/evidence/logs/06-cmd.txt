@@ -1,0 +1,31 @@
+Student: Nguyen Phuc Thinh | Student ID: 2387700066
+CMD: type examples\basic.gitlab-ci.yml
+Completed: 2026-10-28 13:31:40 +07:00
+Exit code: 0
+
+stages:
+  - build
+  - test
+  - deploy
+
+build-job:
+  stage: build
+  script:
+    - echo "Build source for $CI_COMMIT_BRANCH"
+
+test-job1:
+  stage: test
+  script:
+    - echo "Run fast test"
+
+test-job2:
+  stage: test
+  script:
+    - echo "Run a second test in parallel"
+    - sleep 20
+
+deploy-prod:
+  stage: deploy
+  script:
+    - echo "Deploy approved artifact"
+  environment: production

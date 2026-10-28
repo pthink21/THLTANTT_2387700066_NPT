@@ -1,0 +1,17 @@
+Student: Nguyen Phuc Thinh | Student ID: 2387700066
+CMD: node --test tests\content.test.mjs
+Completed: 2026-10-28 13:31:42 +07:00
+Exit code: 0
+
+✔ lab documentation covers the required GitLab workflow (2.7046ms)
+✔ security documentation describes SAST, DAST, SCA and secret scanning (0.6004ms)
+✔ identity appears in the course introduction (0.5678ms)
+✔ evidence gallery has twenty captured CMD screenshots (0.9289ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 55.2124

@@ -1,0 +1,9 @@
+Student: Nguyen Phuc Thinh | Student ID: 2387700066
+CMD: type examples\first.gitlab-ci.yml
+Completed: 2026-10-28 13:31:40 +07:00
+Exit code: 0
+
+hello-job:
+  script:
+    - echo "Hello, $GITLAB_USER_LOGIN!"
+    - date

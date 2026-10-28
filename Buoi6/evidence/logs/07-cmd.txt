@@ -1,0 +1,17 @@
+Student: Nguyen Phuc Thinh | Student ID: 2387700066
+CMD: node --test tests\pipeline.test.mjs
+Completed: 2026-10-28 13:31:41 +07:00
+Exit code: 0
+
+✔ GitLab CI stages keep security before build and deploy (0.7123ms)
+✔ pipeline has the tutorial gates and Pages job (0.1573ms)
+✔ Pages deploy is limited to the default branch (0.0875ms)
+✔ GitHub Actions mirror runs the Buoi6 verification workflow (1.6509ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 82.9429

@@ -1,0 +1,16 @@
+Student: Nguyen Phuc Thinh | Student ID: 2387700066
+CMD: npm.cmd run build
+Completed: 2026-10-28 13:31:50 +07:00
+Exit code: 0
+
+
+> buoi6-devsecops-2387700066@1.0.0 build
+> docusaurus build
+
+[INFO] [vi] Creating an optimized production build...
+[webpackbar] i Compiling Client
+[webpackbar] i Compiling Server
+[webpackbar] √ Server: Compiled successfully in 368.23ms
+[webpackbar] √ Client: Compiled successfully in 411.45ms
+[SUCCESS] Generated static files in "build".
+[INFO] Use `npm run serve` command to test your build locally.

@@ -1,0 +1,67 @@
+Student: Nguyen Phuc Thinh | Student ID: 2387700066
+CMD: npm.cmd test
+Completed: 2026-10-28 13:31:43 +07:00
+Exit code: 0
+
+
+> buoi6-devsecops-2387700066@1.0.0 test
+> node --test --test-reporter=tap tests/*.test.mjs
+
+TAP version 13
+# Subtest: lab documentation covers the required GitLab workflow
+ok 1 - lab documentation covers the required GitLab workflow
+  ---
+  duration_ms: 2.8783
+  type: 'test'
+  ...
+# Subtest: security documentation describes SAST, DAST, SCA and secret scanning
+ok 2 - security documentation describes SAST, DAST, SCA and secret scanning
+  ---
+  duration_ms: 0.5915
+  type: 'test'
+  ...
+# Subtest: identity appears in the course introduction
+ok 3 - identity appears in the course introduction
+  ---
+  duration_ms: 0.5168
+  type: 'test'
+  ...
+# Subtest: evidence gallery has twenty captured CMD screenshots
+ok 4 - evidence gallery has twenty captured CMD screenshots
+  ---
+  duration_ms: 0.6743
+  type: 'test'
+  ...
+# Subtest: GitLab CI stages keep security before build and deploy
+ok 5 - GitLab CI stages keep security before build and deploy
+  ---
+  duration_ms: 0.7136
+  type: 'test'
+  ...
+# Subtest: pipeline has the tutorial gates and Pages job
+ok 6 - pipeline has the tutorial gates and Pages job
+  ---
+  duration_ms: 0.1024
+  type: 'test'
+  ...
+# Subtest: Pages deploy is limited to the default branch
+ok 7 - Pages deploy is limited to the default branch
+  ---
+  duration_ms: 0.0875
+  type: 'test'
+  ...
+# Subtest: GitHub Actions mirror runs the Buoi6 verification workflow
+ok 8 - GitHub Actions mirror runs the Buoi6 verification workflow
+  ---
+  duration_ms: 1.623
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 86.0322

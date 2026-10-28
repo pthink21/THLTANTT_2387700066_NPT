@@ -1,0 +1,29 @@
+Student: Nguyen Phuc Thinh | Student ID: 2387700066
+CMD: git -C "C:\Users\PThinkk\THLTANTT" diff --check & git -C "C:\Users\PThinkk\THLTANTT" status --short
+Completed: 2026-10-28 13:31:56 +07:00
+Exit code: 0
+
+warning: in the working copy of '.github/workflows/buoi6.yml', LF will be replaced by CRLF the next time Git touches it
+ M .github/workflows/buoi6.yml
+ M Buoi4/README.md
+ M Buoi6/reports/build-sha256.json
+ M Buoi6/static/evidence/01-cmd.png
+ M Buoi6/static/evidence/02-cmd.png
+ M Buoi6/static/evidence/03-cmd.png
+ M Buoi6/static/evidence/04-cmd.png
+ M Buoi6/static/evidence/05-cmd.png
+ M Buoi6/static/evidence/06-cmd.png
+ M Buoi6/static/evidence/07-cmd.png
+ M Buoi6/static/evidence/08-cmd.png
+ M Buoi6/static/evidence/09-cmd.png
+ M Buoi6/static/evidence/10-cmd.png
+ M Buoi6/static/evidence/11-cmd.png
+ M Buoi6/static/evidence/12-cmd.png
+ M Buoi6/static/evidence/13-cmd.png
+ M Buoi6/static/evidence/14-cmd.png
+ M Buoi6/static/evidence/15-cmd.png
+ M Buoi6/static/evidence/16-cmd.png
+ M Buoi6/static/evidence/17-cmd.png
+ M Buoi6/static/evidence/18-cmd.png
+ M Buoi6/static/evidence/19-cmd.png
+ M Buoi6/tests/pipeline.test.mjs

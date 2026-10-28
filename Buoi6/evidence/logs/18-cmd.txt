@@ -1,0 +1,8 @@
+Student: Nguyen Phuc Thinh | Student ID: 2387700066
+CMD: node scripts\evidence-check.mjs deploy-rule
+Completed: 2026-10-28 13:31:54 +07:00
+Exit code: 0
+
+Pages stage: deploy
+Deploy condition: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+Artifact source: Buoi6/build/

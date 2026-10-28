@@ -1,0 +1,10 @@
+Student: Nguyen Phuc Thinh | Student ID: 2387700066
+CMD: node scripts\evidence-check.mjs manifest
+Completed: 2026-10-28 13:31:54 +07:00
+Exit code: 0
+
+Algorithm: SHA-256
+Hashed files: 55
+01c7e6cc158075f8c03c5e65301574cce749dc36e42f4a25ce9b59b00ab1bed6  404.html
+f99bba2eface4a052dabcc249203834317dca7e341f3985eb9e551165b2fb95d  assets/css/styles.7133f2e1.css
+913f04197ad58c42a581cb13f7cf4cfa75f4abf6e19408783e77649b0ee08268  assets/files/basic.gitlab-ci-6618c4a00f4196c58b37112b9ba6aef9.yml

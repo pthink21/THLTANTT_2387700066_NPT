@@ -1,0 +1,12 @@
+Student: Nguyen Phuc Thinh | Student ID: 2387700066
+CMD: npm.cmd run audit
+Completed: 2026-10-28 13:31:47 +07:00
+Exit code: 0
+
+
+> buoi6-devsecops-2387700066@1.0.0 audit
+> node scripts/audit-summary.mjs
+
+Dependency audit (npm audit --audit-level=high)
+Critical: 0 | High: 0 | Moderate: 0 | Low: 5
+Detailed JSON: evidence/npm-audit.json
